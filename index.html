@@ -692,23 +692,78 @@
   // window.addEventListener("scroll", updateOverscrollColour);
   // updateOverscrollColour();
 
+  // V3 - more complex gradient approach that blends between multiple colours based on scroll position (definitely not perfect but a fun experiment and looks kinda cool)
+  // const html = document.documentElement;
+
+  // const stops = [
+  //   { p: 0.00, c: [80, 97, 153] },
+  //   { p: 0.1667, c: [108, 129, 170] },
+  //   { p: 0.3333, c: [132, 155, 181] },
+  //   { p: 0.50, c: [156, 177, 186] },
+  //   { p: 0.6667, c: [178, 193, 182] },
+  //   { p: 0.8333, c: [201, 199, 167] },
+  //   { p: 1.00, c: [213, 139, 143] }
+  // ];
+
+  // function lerp(a, b, t) {
+  //   return a + (b - a) * t;
+  // }
+
+  // function mixColor(c1, c2, t) {
+  //   return [
+  //     Math.round(lerp(c1[0], c2[0], t)),
+  //     Math.round(lerp(c1[1], c2[1], t)),
+  //     Math.round(lerp(c1[2], c2[2], t))
+  //   ];
+  // }
+
+  // function getColorAtPosition(t) {
+  //   for (let i = 0; i < stops.length - 1; i++) {
+  //     const s1 = stops[i];
+  //     const s2 = stops[i + 1];
+
+  //     if (t >= s1.p && t <= s2.p) {
+  //       const localT = (t - s1.p) / (s2.p - s1.p);
+  //       const c = mixColor(s1.c, s2.c, localT);
+  //       return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
+  //     }
+  //   }
+
+  //   const last = stops[stops.length - 1].c;
+  //   return `rgb(${last[0]}, ${last[1]}, ${last[2]})`;
+  // }
+
+  // function updateBackground() {
+  //   const scrollTop = window.scrollY;
+  //   const maxScroll = html.scrollHeight - window.innerHeight;
+
+  //   const t = maxScroll > 0
+  //     ? Math.min(1, Math.max(0, scrollTop / maxScroll))
+  //     : 0;
+
+  //   html.style.background = getColorAtPosition(t);
+  // }
+
+  // window.addEventListener("scroll", updateBackground, { passive: true });
+  // updateBackground();
+
   const html = document.documentElement;
 
   const stops = [
-    { p: 0.00, c: [80, 97, 153] },
-    { p: 0.1667, c: [108, 129, 170] },
-    { p: 0.3333, c: [132, 155, 181] },
-    { p: 0.50, c: [156, 177, 186] },
-    { p: 0.6667, c: [178, 193, 182] },
-    { p: 0.8333, c: [201, 199, 167] },
-    { p: 1.00, c: [213, 139, 143] }
+    { p: 0.00, c: [80, 97, 153] },     // #506199
+    { p: 0.1667, c: [108, 129, 170] }, // #6C81AA
+    { p: 0.3333, c: [132, 155, 181] }, // #849BB5
+    { p: 0.50, c: [156, 177, 186] },   // #9CB1BA
+    { p: 0.6667, c: [178, 193, 182] }, // #B2C1B6
+    { p: 0.8333, c: [201, 199, 167] }, // #C9C7A7
+    { p: 1.00, c: [213, 139, 143] }    // #D5B68F (fixed end)
   ];
 
   function lerp(a, b, t) {
     return a + (b - a) * t;
   }
 
-  function mixColor(c1, c2, t) {
+  function mix(c1, c2, t) {
     return [
       Math.round(lerp(c1[0], c2[0], t)),
       Math.round(lerp(c1[1], c2[1], t)),
@@ -716,36 +771,37 @@
     ];
   }
 
-  function getColorAtPosition(t) {
-    for (let i = 0; i < stops.length - 1; i++) {
-      const s1 = stops[i];
-      const s2 = stops[i + 1];
+  function getColor(t) {
+    t = Math.min(1, Math.max(0, t));
 
-      if (t >= s1.p && t <= s2.p) {
-        const localT = (t - s1.p) / (s2.p - s1.p);
-        const c = mixColor(s1.c, s2.c, localT);
+    for (let i = 0; i < stops.length - 1; i++) {
+      const a = stops[i];
+      const b = stops[i + 1];
+
+      if (t >= a.p && t <= b.p) {
+        const localT = (t - a.p) / (b.p - a.p);
+        const c = mix(a.c, b.c, localT);
         return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
       }
     }
 
+    // 🔥 hard guarantee exact final colour
     const last = stops[stops.length - 1].c;
     return `rgb(${last[0]}, ${last[1]}, ${last[2]})`;
   }
 
   function updateBackground() {
     const scrollTop = window.scrollY;
-    const maxScroll = html.scrollHeight - window.innerHeight;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-    const t = maxScroll > 0
-      ? Math.min(1, Math.max(0, scrollTop / maxScroll))
-      : 0;
+    const t = maxScroll > 0 ? scrollTop / maxScroll : 0;
 
-    html.style.background = getColorAtPosition(t);
+    html.style.background = getColor(t);
   }
 
   window.addEventListener("scroll", updateBackground, { passive: true });
   updateBackground();
-  
+
   </script>
 </body>
 </html>
