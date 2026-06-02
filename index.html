@@ -100,6 +100,7 @@
     transition: background 0.15s, border-color 0.15s;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    text-align: center;
   }
   .pill:hover { background: rgba(255,255,255,0.32); }
 
@@ -378,7 +379,7 @@
   @media (max-width: 700px) {
     nav { padding: 8px 14px; }
     .nav-center { display: none; }
-    .hero { padding: 32px 14px 28px; }
+    .hero { padding: 20px 14px 25px; }
     .photo-strip { padding: 16px 14px 0; }
     .photo-card { width: 110px; }
     .photo-card img { height: 84px; }
@@ -398,9 +399,10 @@
   @media (max-width: 480px) {
     /* .nav-right .pill:nth-child(n+2) { display: none; } */
     .nav-right .pill { display: none; }
-    .hero h1 { font-size: 32px; }
+    /* .hero h1 { font-size: 32px; } */
     nav {align-items: center; justify-content: center;}
-    .nav-left {width: 100%; gap: auto; justify-content: center;}
+    .nav-left {width: 100%; gap: auto; justify-content: space-between;}
+    .nav-left .pill {width: 100%;}
     
   }
 
