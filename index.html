@@ -638,24 +638,57 @@
     }
   }
 
+  // const html = document.documentElement;
+
+  // const TOP_COLOUR = "#506199";
+  // const BOTTOM_COLOUR = "#D5B68F";
+
+  // function updateOverscrollColour() {
+  //   const scrollTop = window.scrollY;
+  //   const maxScroll = html.scrollHeight - window.innerHeight;
+
+  //   if (scrollTop <= 0) {
+  //     html.style.background = TOP_COLOUR;
+  //   } else if (scrollTop >= maxScroll - 1) {
+  //     html.style.background = BOTTOM_COLOUR;
+  //   }
+  // }
+
+  // window.addEventListener("scroll", updateOverscrollColour);
+  // updateOverscrollColour();
   const html = document.documentElement;
 
   const TOP_COLOUR = "#506199";
   const BOTTOM_COLOUR = "#D5B68F";
 
+  let lastScrollY = window.scrollY;
+
   function updateOverscrollColour() {
-    const scrollTop = window.scrollY;
+    const scrollY = window.scrollY;
     const maxScroll = html.scrollHeight - window.innerHeight;
 
-    if (scrollTop <= 0) {
+    const scrollingDown = scrollY > lastScrollY;
+    const scrollingUp = scrollY < lastScrollY;
+
+    if (scrollY <= 0) {
       html.style.background = TOP_COLOUR;
-    } else if (scrollTop >= maxScroll - 1) {
+    } 
+    else if (scrollY >= maxScroll) {
       html.style.background = BOTTOM_COLOUR;
     }
+    else {
+      if (scrollingDown) {
+        html.style.background = BOTTOM_COLOUR;
+      } else if (scrollingUp) {
+        html.style.background = TOP_COLOUR;
+      }
+    }
+
+    lastScrollY = scrollY;
   }
 
   window.addEventListener("scroll", updateOverscrollColour);
   updateOverscrollColour();
-</script>
+  </script>
 </body>
 </html>
