@@ -250,6 +250,20 @@
     border: 0.5px solid rgba(0,0,0,0.08);
     border-radius: 10px;
     overflow: hidden;
+    /* smooth collapse */
+    max-height: 3000px;
+    opacity: 1;
+    transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1),
+                opacity 0.3s ease,
+                margin-top 0.3s ease,
+                border-color 0.3s ease;
+  }
+
+  .showcase-panel.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0 !important;
+    border-color: transparent;
   }
 
   .showcase-header {
@@ -619,133 +633,24 @@
   setInterval(updateClock, 1000);
 
   // Category filter
+// Category filter — class-based so max-height transition works
   function filterCategory(el, filter) {
     document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
     el.classList.add('active');
-
     const uxPanel = document.getElementById('panel-ux');
     const csPanel = document.getElementById('panel-cs');
-
     if (filter === 'ux') {
-      uxPanel.style.display = '';
-      csPanel.style.display = 'none';
+      uxPanel.classList.remove('collapsed');
+      csPanel.classList.add('collapsed');
     } else if (filter === 'cs') {
-      uxPanel.style.display = 'none';
-      csPanel.style.display = '';
+      uxPanel.classList.add('collapsed');
+      csPanel.classList.remove('collapsed');
     } else {
-      uxPanel.style.display = '';
-      csPanel.style.display = '';
+      uxPanel.classList.remove('collapsed');
+      csPanel.classList.remove('collapsed');
     }
   }
-  // V1 - simple top/bottom colour change on overscroll
-  // const html = document.documentElement;
 
-  // const TOP_COLOUR = "#506199";
-  // const BOTTOM_COLOUR = "#D5B68F";
-
-  // function updateOverscrollColour() {
-  //   const scrollTop = window.scrollY;
-  //   const maxScroll = html.scrollHeight - window.innerHeight;
-
-  //   if (scrollTop <= 0) {
-  //     html.style.background = TOP_COLOUR;
-  //   } else if (scrollTop >= maxScroll - 1) {
-  //     html.style.background = BOTTOM_COLOUR;
-  //   }
-  // }
-
-  // window.addEventListener("scroll", updateOverscrollColour);
-  // updateOverscrollColour();
-
-  // V2 - attempt at dynamic overscroll colour based on scroll direction (not perfect but a fun experiment)
-  // const html = document.documentElement;
-
-  // const TOP_COLOUR = "#506199";
-  // const BOTTOM_COLOUR = "#D5B68F";
-
-  // let lastScrollY = window.scrollY;
-
-  // function updateOverscrollColour() {
-  //   const scrollY = window.scrollY;
-  //   const maxScroll = html.scrollHeight - window.innerHeight;
-
-  //   const scrollingDown = scrollY > lastScrollY;
-  //   const scrollingUp = scrollY < lastScrollY;
-
-  //   if (scrollY <= 0) {
-  //     html.style.background = TOP_COLOUR;
-  //   } 
-  //   else if (scrollY >= maxScroll) {
-  //     html.style.background = BOTTOM_COLOUR;
-  //   }
-  //   else {
-  //     if (scrollingDown) {
-  //       html.style.background = BOTTOM_COLOUR;
-  //     } else if (scrollingUp) {
-  //       html.style.background = TOP_COLOUR;
-  //     }
-  //   }
-
-  //   lastScrollY = scrollY;
-  // }
-
-  // window.addEventListener("scroll", updateOverscrollColour);
-  // updateOverscrollColour();
-
-  // V3 - more complex gradient approach that blends between multiple colours based on scroll position (definitely not perfect but a fun experiment and looks kinda cool)
-  // const html = document.documentElement;
-
-  // const stops = [
-  //   { p: 0.00, c: [80, 97, 153] },
-  //   { p: 0.1667, c: [108, 129, 170] },
-  //   { p: 0.3333, c: [132, 155, 181] },
-  //   { p: 0.50, c: [156, 177, 186] },
-  //   { p: 0.6667, c: [178, 193, 182] },
-  //   { p: 0.8333, c: [201, 199, 167] },
-  //   { p: 1.00, c: [213, 139, 143] }
-  // ];
-
-  // function lerp(a, b, t) {
-  //   return a + (b - a) * t;
-  // }
-
-  // function mixColor(c1, c2, t) {
-  //   return [
-  //     Math.round(lerp(c1[0], c2[0], t)),
-  //     Math.round(lerp(c1[1], c2[1], t)),
-  //     Math.round(lerp(c1[2], c2[2], t))
-  //   ];
-  // }
-
-  // function getColorAtPosition(t) {
-  //   for (let i = 0; i < stops.length - 1; i++) {
-  //     const s1 = stops[i];
-  //     const s2 = stops[i + 1];
-
-  //     if (t >= s1.p && t <= s2.p) {
-  //       const localT = (t - s1.p) / (s2.p - s1.p);
-  //       const c = mixColor(s1.c, s2.c, localT);
-  //       return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
-  //     }
-  //   }
-
-  //   const last = stops[stops.length - 1].c;
-  //   return `rgb(${last[0]}, ${last[1]}, ${last[2]})`;
-  // }
-
-  // function updateBackground() {
-  //   const scrollTop = window.scrollY;
-  //   const maxScroll = html.scrollHeight - window.innerHeight;
-
-  //   const t = maxScroll > 0
-  //     ? Math.min(1, Math.max(0, scrollTop / maxScroll))
-  //     : 0;
-
-  //   html.style.background = getColorAtPosition(t);
-  // }
-
-  // window.addEventListener("scroll", updateBackground, { passive: true });
-  // updateBackground();
 
   const html = document.documentElement;
 
