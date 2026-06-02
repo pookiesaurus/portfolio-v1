@@ -452,6 +452,95 @@
   /* Smooth category filter */
   .project-row { transition: background 0.15s, opacity 0.2s, max-height 0.25s; }
   .project-row.hidden { display: none; }
+
+  .now-playing-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 20px 6px 6px;
+    width: fit-content;
+    cursor: pointer;
+    height: 41px;
+  }
+
+  .np-disc {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .np-disc img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* spin animation */
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+
+  .np-disc {
+   animation: spin 4s linear infinite;
+    animation-play-state: paused;  /* start paused */
+  }
+  .np-disc.playing {
+    animation-play-state: running;
+  }
+
+  .np-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+  }
+  .np-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .np-artist {
+    font-size: 11px;
+    color: rgba(0,0,0,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .np-bar-track {
+    margin-top: 3px;
+    height: 2px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    width: 100%;
+  }
+  .np-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: rgba(0,0,0,0.4);
+    border-radius: 2px;
+    transition: width 0.5s linear;
+  }
+
+  .np-label {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(0,0,0,0.60);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
 </style>
 </head>
 <body>
@@ -466,7 +555,19 @@
   </div>
   <div class="nav-center">Ryan Pham</div>
   <div class="nav-right">
-    <span class="pill">now playing · artist</span>
+    <div class="pill now-playing-pill" id="now-playing" onclick="togglePlay()">
+      <div class="np-disc" id="np-disc">
+        <img src="YOUR_COVER_URL" id="np-cover" alt="cover">
+      </div>
+      <div class="np-info">
+        <div class="np-info">
+          <span class="np-label" id="np-label">Song Title · Artist Name</span>
+          <div class="np-bar-track">
+            <div class="np-bar-fill" id="np-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <span class="pill">melbourne, au</span>
     <span class="pill" id="clock">--:--:--</span>
   </div>
@@ -777,6 +878,68 @@
   window.addEventListener("scroll", updateBackground, { passive: true });
   updateBackground();
 
+  const tracks = [
+    {
+      title: 'the louvre',
+      artist: 'lorde',
+      src: 'audio/track1.mp3',
+      cover: 'images/cover1.png'
+    },
+    {
+      title: 'born to die',
+      artist: 'lana del rey',
+      src: 'audio/track2.mp3',
+      cover: 'images/cover2.jpg'
+    }
+  ];
+
+  const audio = new Audio();
+  audio.volume = 0.1;
+
+  let isPlaying = false;
+  let currentTrack = 0;
+
+  function loadTrack(i) {
+    const t = tracks[i];
+    audio.src = t.src;
+    audio.volume = 0.1;
+    document.getElementById('np-label').textContent = `${t.title} · ${t.artist}`;
+    document.getElementById('np-cover').src = t.cover;
+  }
+
+  function togglePlay() {
+    if (isPlaying) {
+      audio.pause();
+      isPlaying = false;
+      document.getElementById('np-disc').style.animationPlayState = 'paused';
+    } else {
+      audio.play();
+      isPlaying = true;
+      document.getElementById('np-disc').style.animationPlayState = 'running';
+    }
+  }
+
+  audio.addEventListener('timeupdate', () => {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    document.getElementById('np-bar').style.width = pct + '%';
+  });
+
+  audio.addEventListener('ended', () => {
+    // isPlaying = false;
+    // document.getElementById('np-disc').style.animationPlayState = 'paused';
+    // document.getElementById('np-bar').style.width = '0%';
+    currentTrack = (currentTrack + 1) % tracks.length; // loop playlist
+    loadTrack(currentTrack);
+
+    audio.play();
+    isPlaying = true;
+
+    document.getElementById('np-disc').style.animationPlayState = 'running';
+    document.getElementById('np-bar').style.width = '0%';
+  });
+
+  loadTrack(currentTrack);
   </script>
 </body>
 </html>
