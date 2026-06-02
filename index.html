@@ -637,7 +637,7 @@
       csPanel.style.display = '';
     }
   }
-
+  // V1 - simple top/bottom colour change on overscroll
   // const html = document.documentElement;
 
   // const TOP_COLOUR = "#506199";
@@ -656,39 +656,96 @@
 
   // window.addEventListener("scroll", updateOverscrollColour);
   // updateOverscrollColour();
+
+  // V2 - attempt at dynamic overscroll colour based on scroll direction (not perfect but a fun experiment)
+  // const html = document.documentElement;
+
+  // const TOP_COLOUR = "#506199";
+  // const BOTTOM_COLOUR = "#D5B68F";
+
+  // let lastScrollY = window.scrollY;
+
+  // function updateOverscrollColour() {
+  //   const scrollY = window.scrollY;
+  //   const maxScroll = html.scrollHeight - window.innerHeight;
+
+  //   const scrollingDown = scrollY > lastScrollY;
+  //   const scrollingUp = scrollY < lastScrollY;
+
+  //   if (scrollY <= 0) {
+  //     html.style.background = TOP_COLOUR;
+  //   } 
+  //   else if (scrollY >= maxScroll) {
+  //     html.style.background = BOTTOM_COLOUR;
+  //   }
+  //   else {
+  //     if (scrollingDown) {
+  //       html.style.background = BOTTOM_COLOUR;
+  //     } else if (scrollingUp) {
+  //       html.style.background = TOP_COLOUR;
+  //     }
+  //   }
+
+  //   lastScrollY = scrollY;
+  // }
+
+  // window.addEventListener("scroll", updateOverscrollColour);
+  // updateOverscrollColour();
+
   const html = document.documentElement;
 
-  const TOP_COLOUR = "#506199";
-  const BOTTOM_COLOUR = "#D5B68F";
+  const stops = [
+    { p: 0.00, c: [80, 97, 153] },
+    { p: 0.1667, c: [108, 129, 170] },
+    { p: 0.3333, c: [132, 155, 181] },
+    { p: 0.50, c: [156, 177, 186] },
+    { p: 0.6667, c: [178, 193, 182] },
+    { p: 0.8333, c: [201, 199, 167] },
+    { p: 1.00, c: [213, 139, 143] }
+  ];
 
-  let lastScrollY = window.scrollY;
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
 
-  function updateOverscrollColour() {
-    const scrollY = window.scrollY;
-    const maxScroll = html.scrollHeight - window.innerHeight;
+  function mixColor(c1, c2, t) {
+    return [
+      Math.round(lerp(c1[0], c2[0], t)),
+      Math.round(lerp(c1[1], c2[1], t)),
+      Math.round(lerp(c1[2], c2[2], t))
+    ];
+  }
 
-    const scrollingDown = scrollY > lastScrollY;
-    const scrollingUp = scrollY < lastScrollY;
+  function getColorAtPosition(t) {
+    for (let i = 0; i < stops.length - 1; i++) {
+      const s1 = stops[i];
+      const s2 = stops[i + 1];
 
-    if (scrollY <= 0) {
-      html.style.background = TOP_COLOUR;
-    } 
-    else if (scrollY >= maxScroll) {
-      html.style.background = BOTTOM_COLOUR;
-    }
-    else {
-      if (scrollingDown) {
-        html.style.background = BOTTOM_COLOUR;
-      } else if (scrollingUp) {
-        html.style.background = TOP_COLOUR;
+      if (t >= s1.p && t <= s2.p) {
+        const localT = (t - s1.p) / (s2.p - s1.p);
+        const c = mixColor(s1.c, s2.c, localT);
+        return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
       }
     }
 
-    lastScrollY = scrollY;
+    const last = stops[stops.length - 1].c;
+    return `rgb(${last[0]}, ${last[1]}, ${last[2]})`;
   }
 
-  window.addEventListener("scroll", updateOverscrollColour);
-  updateOverscrollColour();
+  function updateBackground() {
+    const scrollTop = window.scrollY;
+    const maxScroll = html.scrollHeight - window.innerHeight;
+
+    const t = maxScroll > 0
+      ? Math.min(1, Math.max(0, scrollTop / maxScroll))
+      : 0;
+
+    html.style.background = getColorAtPosition(t);
+  }
+
+  window.addEventListener("scroll", updateBackground, { passive: true });
+  updateBackground();
+  
   </script>
 </body>
 </html>
