@@ -28,9 +28,10 @@
     --card-border: rgba(255,255,255,0);
     --projects-bg: #d8d5c800;
     --section-card-bg: rgba(255,255,255,0);
-    --pill-bg: rgba(255,255,255,0.22);
+    --pill-bg: rgba(255,255,255,0.25);
     --pill-border: rgba(255,255,255,0.4);
-    --left-right-padding: 44px;
+    --left-right-padding: 35px;
+    --subheading: #38414B;
   }
 
   html { 
@@ -77,7 +78,7 @@
     font-size: 16px; 
     font-weight: 500; 
     color: rgba(0, 0, 0, 0.66); 
-    letter-spacing: 0.01em;
+    /* letter-spacing: 0.01em; */
 
     position: absolute;
     left: 50%;
@@ -112,7 +113,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    transform: translateX(-2px)
+    transform: translateX(-7px)
   }
 
   .hero h1 {
@@ -121,7 +122,8 @@
     font-weight: 600;
     line-height: 1.05;
     color: rgba(0, 0, 0, 0.53);
-    letter-spacing: -0.02em;
+    letter-spacing: -3%;
+    /* letter-spacing: -0.02em; */
   }
   .hero h1 .dim { color: rgba(0, 0, 0, 0.35); }
 
@@ -173,6 +175,7 @@
   }
 
   /* PROJECTS SECTION */
+
   .projects-section {
     background: var(--projects-bg);
     padding: 32px var(--left-right-padding) 48px;
@@ -187,28 +190,30 @@
 
   .projects-layout {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 16px;
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
     align-items: start;
+    /* justify-items: start; */
   }
 
   /* CATEGORIES SIDEBAR */
   .categories-panel {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.3);
     border: 0.5px solid rgba(0,0,0,0.08);
     border-radius: 10px;
     padding: 14px;
+    padding-bottom: 2px;
     position: sticky;
     top: 101px;
   }
 
   .categories-panel h3 {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--subheading);
+    /* text-transform: uppercase; */
+    /* letter-spacing: 0.06em; */
+    margin-bottom: 16px;
   }
 
   .category-item {
@@ -216,24 +221,25 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.15s;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
+    background: rgba(255,255,255,0.3);
   }
-  .category-item:hover, .category-item.active { background: rgba(255,255,255,0.7); }
+  .category-item:hover, .category-item.active { background: rgba(255,255,255,0.55); }
   .category-item h4 {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 2px;
   }
   .category-item p {
-    font-size: 11px;
+    font-size: 14px;
     color: var(--text-muted);
     line-height: 1.4;
   }
 
   /* SHOWCASE PANELS */
   .showcase-panel {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.3);
     border: 0.5px solid rgba(0,0,0,0.08);
     border-radius: 10px;
     overflow: hidden;
@@ -251,38 +257,61 @@
     opacity: 0;
     margin-top: 0 !important;
     border-color: transparent;
+    margin-bottom: 0;
+    margin: 0;
   }
 
   .showcase-header {
     padding: 14px 16px 10px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-muted);
-    border-bottom: 0.5px solid rgba(0,0,0,0.07);
+    padding-bottom: 0px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--subheading);
+    /* border-bottom: 0.5px solid rgba(0,0,0,0.07); */
+  }
+  
+  .project-box {
+    padding: 16px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
   }
 
   .project-row {
     display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: 16px;
+    grid-template-columns: 1fr 400px;
+    gap: 24px;
     padding: 20px 16px;
+    background: rgba(255,255,255,0.3);
     border-bottom: 0.5px solid rgba(0,0,0,0.06);
     cursor: pointer;
     transition: background 0.15s;
-    align-items: start;
+    align-items: stretch;
+    border-radius: 8px;
   }
   .project-row:last-child { border-bottom: none; }
-  .project-row:hover { background: rgba(255,255,255,0.4); }
+  .project-row:hover { background: rgba(255,255,255,0.55); }
 
+ .project-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
   .project-info h3 {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 8px;
   }
 
   .project-info p {
-    font-size: 12px;
+    font-size: 16px;
     color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 12px;
@@ -297,7 +326,7 @@
     display: flex;
     align-items: center;
     gap: 0;
-    font-size: 11px;
+    font-size: 14px;
     color: var(--text-muted);
     flex-wrap: wrap;
     gap: 4px;
@@ -317,29 +346,32 @@
   .meta-dot:first-child::before { display: none; }
 
   .project-image {
+    height: 250px;
+    width: 100%;
     border-radius: 8px;
     overflow: hidden;
     background: rgba(0,0,0,0.06);
-    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .project-image img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-    display: block;
+    /* height: 250px;    
+    width: 100%; */
+    flex: 1;
   }
   .project-image.placeholder {
     background: repeating-conic-gradient(rgba(0,0,0,0.04) 0% 25%, transparent 0% 50%) 0 0 / 12px 12px;
   }
 
   /* CS SHOWCASE — slightly different bg */
-  .cs-showcase { margin-top: 16px; }
+  /* .cs-showcase { margin-top: 16px; } */
   .cs-showcase .showcase-panel {
     background: rgba(200,195,180,0.4);
   }
+
+  .ux-showcase {margin-bottom: 16px;}
 
   /* FOOTER */
   footer {
@@ -355,7 +387,7 @@
     font-size: clamp(28px, 5vw, 48px);
     font-weight: 600;
     color: rgba(30,25,20,0.85);
-    letter-spacing: -0.02em;
+    /* letter-spacing: -0.02em; */
   }
 
   .footer-links {
@@ -379,7 +411,7 @@
   @media (max-width: 700px) {
     nav { padding: 8px 14px; }
     .nav-center { display: none; }
-    .hero { padding: 20px 14px 25px; }
+    .hero { padding: 20px 14px 25px; transform: translateX(7px);}
     .photo-strip { padding: 16px 14px 0; }
     .photo-card { width: 110px; }
     .photo-card img { height: 84px; }
@@ -491,7 +523,7 @@
     <div class="categories-panel">
       <h3>Categories</h3>
       <div class="category-item active" data-filter="ux" onclick="filterCategory(this, 'ux')">
-        <h4>UI/UX projects ↵</h4>
+        <h4>UI/UX projects</h4>
         <p>lorem ipsum blah blah blah</p>
       </div>
       <div class="category-item" data-filter="cs" onclick="filterCategory(this, 'cs')">
@@ -505,68 +537,79 @@
     </div>
 
     <!-- MAIN PANELS -->
-    <div>
+    <div class="selected-works">
 
       <!-- UX SHOWCASE -->
-      <div class="showcase-panel" id="panel-ux">
+      <div class="showcase-panel ux-showcase" id="panel-ux">
         <div class="showcase-header">UI/UX showcase</div>
 
-        <div class="project-row" data-category="ux">
-          <div class="project-info">
-            <h3>Starchitect</h3>
-            <p>board game for game design so fun!! A collaborative design challenge exploring systems thinking, player experience, and physical prototyping for tabletop play.</p>
-            <div class="project-meta">
-              <span class="meta-dot">Month year</span>
-              <span class="meta-dot">uni project</span>
-              <span class="meta-dot">product design concept</span>
+        <div class="project-box">
+          <div class="project-row" data-category="ux">
+            <div class="project-info">
+              <h3>Starchitect</h3>
+              <div class="project-info-text">
+                <p>board game for game design so fun!! A collaborative design challenge exploring systems thinking, player experience, and physical prototyping for tabletop play.</p>
+                <div class="project-meta">
+                  <span class="meta-dot">Month year</span>
+                  <span class="meta-dot">uni project</span>
+                  <span class="meta-dot">product design concept</span>
+                </div>
+              </div>
+            </div>
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&q=70" alt="Starchitect board game">
             </div>
           </div>
-          <div class="project-image">
-            <img src="https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&q=70" alt="Starchitect board game">
-          </div>
-        </div>
 
-        <div class="project-row" data-category="ux">
-          <div class="project-info">
-            <h3>advanced interface design</h3>
-            <p>board game for game design so fun!! Exploring advanced interaction paradigms, micro-animation systems, and next-gen design tokens across multi-platform surfaces.</p>
-            <div class="project-meta">
-              <span class="meta-dot">Month year</span>
-              <span class="meta-dot">uni project</span>
-              <span class="meta-dot">product design concept</span>
+          <div class="project-row" data-category="ux">
+            <div class="project-info">
+              <h3>advanced interface design</h3>
+              <div class="project-info-text">
+                <p>board game for game design so fun!! Exploring advanced interaction paradigms, micro-animation systems, and next-gen design tokens across multi-platform surfaces.</p>
+                <div class="project-meta">
+                  <span class="meta-dot">Month year</span>
+                  <span class="meta-dot">uni project</span>
+                  <span class="meta-dot">product design concept</span>
+                </div>
+              </div>
             </div>
+            <div class="project-image placeholder"></div>
           </div>
-          <div class="project-image placeholder"></div>
-        </div>
 
-        <div class="project-row" data-category="ux">
-          <div class="project-info">
-            <h3>AI Resume/Portfolio Design Prototype</h3>
-            <p>A group project where we conducted user research, design thinking, and digital prototyping to create an AI-powered portfolio builder that grows with the user.</p>
-            <div class="project-meta">
-              <span class="meta-dot">Month year</span>
-              <span class="meta-dot">uni project</span>
-              <span class="meta-dot">product design concept</span>
+          <div class="project-row" data-category="ux">
+            <div class="project-info">
+              <h3>AI Resume/Portfolio Design Prototype</h3>
+              <div class="project-info-text">
+                <p>A group project where we conducted user research, design thinking, and digital prototyping to create an AI-powered portfolio builder that grows with the user.</p>
+                <div class="project-meta">
+                  <span class="meta-dot">Month year</span>
+                  <span class="meta-dot">uni project</span>
+                  <span class="meta-dot">product design concept</span>
+                </div>
+              </div>
+            </div>
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=400&q=70" alt="AI Portfolio Prototype">
             </div>
           </div>
-          <div class="project-image">
-            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=400&q=70" alt="AI Portfolio Prototype">
-          </div>
-        </div>
 
-        <div class="project-row" data-category="ux">
-          <div class="project-info">
-            <h3>Sweet Mayada Cakes Redesign</h3>
-            <p>A case study in redesigning a small local business' website and branding — improving findability, purchase flow, and visual identity for a Melbourne bakery.</p>
-            <div class="project-meta">
-              <span class="meta-dot">Month year</span>
-              <span class="meta-dot">uni project</span>
-              <span class="meta-dot">product design concept</span>
+          <div class="project-row" data-category="ux">
+            <div class="project-info">
+              <h3>Sweet Mayada Cakes Redesign</h3>
+              <div class="project-info-text">
+                <p>A case study in redesigning a small local business' website and branding — improving findability, purchase flow, and visual identity for a Melbourne bakery.</p>
+                <div class="project-meta">
+                  <span class="meta-dot">Month year</span>
+                  <span class="meta-dot">uni project</span>
+                  <span class="meta-dot">product design concept</span>
+                </div>
+              </div>
+            </div>
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=70" alt="Sweet Mayada Cakes">
             </div>
           </div>
-          <div class="project-image">
-            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=70" alt="Sweet Mayada Cakes">
-          </div>
+
         </div>
 
       </div><!-- /ux panel -->
@@ -575,19 +618,58 @@
       <div class="showcase-panel cs-showcase" id="panel-cs">
         <div class="showcase-header">Computer Science showcase</div>
 
-        <div class="project-row" data-category="cs">
-          <div class="project-info">
-            <h3>Ryan Mug</h3>
-            <p>A placeholder for another project really… a full-stack application exploring creative computing, personalised print interfaces, and e-commerce integration concepts.</p>
-            <div class="project-meta">
-              <span class="meta-dot">Month year</span>
-              <span class="meta-dot">uni project</span>
-              <span class="meta-dot">computer science concept</span>
+        <div class="project-box">
+          <div class="project-row" data-category="cs">
+            <div class="project-info">
+              <h3>Ryan Mug</h3>
+              <div class="project-info-text">
+                <p>A placeholder for another project really… a full-stack application exploring creative computing, personalised print interfaces, and e-commerce integration concepts.</p>
+                <div class="project-meta">
+                  <span class="meta-dot">Month year</span>
+                  <span class="meta-dot">uni project</span>
+                  <span class="meta-dot">computer science concept</span>
+                </div>
+              </div>
+            </div>
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=70" alt="Ryan Mug project">
             </div>
           </div>
-          <div class="project-image">
-            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=70" alt="Ryan Mug project">
+
+          <div class="project-row" data-category="cs">
+            <div class="project-info">
+              <h3>Ryan Mug</h3>
+              <div class="project-info-text">
+                <p>A placeholder for another project really… a full-stack application exploring creative computing, personalised print interfaces, and e-commerce integration concepts.</p>
+                <div class="project-meta">
+                  <span class="meta-dot">Month year</span>
+                  <span class="meta-dot">uni project</span>
+                  <span class="meta-dot">computer science concept</span>
+                </div>
+              </div>
+            </div>
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=70" alt="Ryan Mug project">
+            </div>
           </div>
+
+          <div class="project-row" data-category="cs">
+            <div class="project-info">
+              <h3>Ryan Mug</h3>
+              <div class="project-info-text">
+                <p>A placeholder for another project really… a full-stack application exploring creative computing, personalised print interfaces, and e-commerce integration concepts.</p>
+                <div class="project-meta">
+                  <span class="meta-dot">Month year</span>
+                  <span class="meta-dot">uni project</span>
+                  <span class="meta-dot">computer science concept</span>
+                </div>
+              </div>
+            </div>
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=70" alt="Ryan Mug project">
+            </div>
+          </div>
+
         </div>
 
       </div><!-- /cs panel -->
@@ -678,7 +760,6 @@
       }
     }
 
-    // 🔥 hard guarantee exact final colour
     const last = stops[stops.length - 1].c;
     return `rgb(${last[0]}, ${last[1]}, ${last[2]})`;
   }
