@@ -13,6 +13,8 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+
+
   :root {
     --bg-hero: #6b6fa8;
     --bg-hero: 
@@ -28,6 +30,7 @@
     --section-card-bg: rgba(255,255,255,0);
     --pill-bg: rgba(255,255,255,0.22);
     --pill-border: rgba(255,255,255,0.4);
+    --left-right-padding: 44px;
   }
 
   html { 
@@ -64,14 +67,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 24px;
+    padding: 30px var(--left-right-padding);
     /* background: var(--bg-hero);
     border-bottom: 0.5px solid rgba(255,255,255,0.15); */
   }
 
-  .nav-left { display: flex; gap: 6px; }
-  .nav-center { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.9); letter-spacing: 0.01em; }
-  .nav-right { display: flex; gap: 6px; align-items: center; }
+  .nav-left { display: flex; gap: 8px; }
+  .nav-center { 
+    font-size: 16px; 
+    font-weight: 500; 
+    color: rgba(0, 0, 0, 0.66); 
+    letter-spacing: 0.01em;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-right { display: flex; gap: 8px; align-items: center; }
 
   .pill {
     background: var(--pill-bg);
@@ -91,38 +103,10 @@
   }
   .pill:hover { background: rgba(255,255,255,0.32); }
 
-  .pill-toggle {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--pill-bg);
-    border: 0.5px solid var(--pill-border);
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.88);
-  }
-  .toggle-dot {
-    width: 20px; height: 12px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 6px;
-    position: relative;
-    cursor: pointer;
-  }
-  .toggle-dot::after {
-    content: '';
-    position: absolute;
-    width: 8px; height: 8px;
-    background: white;
-    border-radius: 50%;
-    top: 2px; left: 2px;
-    transition: transform 0.2s;
-  }
-
   /* HERO */
   .hero {
     background: var(--bg-hero);
-    padding: 48px 24px 40px;
+    padding: 20px var(--left-right-padding) 40px;
     min-height: 280px;
     display: flex;
     flex-direction: column;
@@ -130,18 +114,19 @@
   }
 
   .hero h1 {
-    font-size: clamp(36px, 7vw, 72px);
+    /* clamp(36px, 7vw, 72px) */
+    font-size: clamp(64px, 5vw, 100px);
     font-weight: 600;
     line-height: 1.05;
-    color: rgba(255,255,255,0.95);
+    color: rgba(0, 0, 0, 0.53);
     letter-spacing: -0.02em;
   }
-  .hero h1 .dim { color: rgba(255,255,255,0.45); }
+  .hero h1 .dim { color: rgba(0, 0, 0, 0.35); }
 
   /* PHOTO STRIP */
   .photo-strip {
     background: var(--bg-hero);
-    padding: 24px 24px 0;
+    padding: 24px var(--left-right-padding) 0;
     overflow: hidden;
   }
 
@@ -182,13 +167,13 @@
   hr.section-divider {
     border: none;
     border-top: 0.5px solid rgba(255,255,255,0.2);
-    margin: 28px 24px 0;
+    margin: 28px var(--left-right-padding) 0;
   }
 
   /* PROJECTS SECTION */
   .projects-section {
     background: var(--projects-bg);
-    padding: 32px 24px 48px;
+    padding: 32px var(--left-right-padding) 48px;
   }
 
   .projects-section h2 {
@@ -212,7 +197,7 @@
     border-radius: 10px;
     padding: 14px;
     position: sticky;
-    top: 60px;
+    top: 101px;
   }
 
   .categories-panel h3 {
@@ -357,7 +342,7 @@
   /* FOOTER */
   footer {
     background: var(--bg-footer);
-    padding: 32px 24px 28px;
+    padding: 32px var(--left-right-padding) 28px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -405,13 +390,12 @@
     .category-item p { display: none; }
     .project-row { grid-template-columns: 1fr; }
     .project-image { height: 160px; order: -1; }
-    footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+    footer { flex-direction: column; align-items: flex-start; gap: 20px; padding: 32px 24px 28px;}
     .footer-links { align-items: flex-start; }
   }
 
   @media (max-width: 480px) {
     .nav-right .pill:nth-child(n+2) { display: none; }
-    .pill-toggle { display: none; }
     .hero h1 { font-size: 32px; }
   }
 
@@ -444,9 +428,6 @@
   </div>
   <div class="nav-center">Ryan Pham</div>
   <div class="nav-right">
-    <div class="pill-toggle">
-      <div class="toggle-dot"></div>
-    </div>
     <span class="pill">now playing · artist</span>
     <span class="pill">melbourne, au</span>
     <span class="pill" id="clock">--:--:--</span>
