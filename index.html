@@ -107,7 +107,7 @@
   .hero {
     background: var(--bg-hero);
     padding: 12px var(--left-right-padding) 40px;
-    min-height: 200px;
+    /* min-height: 200px; */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -396,8 +396,11 @@
   }
 
   @media (max-width: 480px) {
-    .nav-right .pill:nth-child(n+2) { display: none; }
+    /* .nav-right .pill:nth-child(n+2) { display: none; } */
+    .nav-right .pill { display: none; }
     .hero h1 { font-size: 32px; }
+    nav {align-items: center; justify-content: center;}
+    
   }
 
   /* Fade-in on load */
