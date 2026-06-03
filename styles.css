@@ -364,13 +364,15 @@ height: 250px;
 width: 100%;
 border-radius: 8px;
 overflow: hidden;
-background: rgba(0,0,0,0.06);
+background: rgba(255, 255, 255, 0.3);
 display: flex;
 align-items: center;
 justify-content: center;
 }
 .project-image img {
 object-fit: cover;
+width: 100%;
+height: 100%;
 /* height: 250px;    
 width: 100%; */
 flex: 1;
