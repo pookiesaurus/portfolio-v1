@@ -394,7 +394,7 @@ align-items: flex-end;
 footer .footer-name {
 font-size: clamp(28px, 5vw, 48px);
 font-weight: 600;
-color: rgba(30,25,20,0.85);
+color: rgba(0, 0, 0, 0.53);
 /* letter-spacing: -0.02em; */
 }
 
@@ -603,4 +603,56 @@ text-overflow: ellipsis;
 
 @media (max-width: 575px) {
   .home-fab { display: block; }
+}
+
+/* grid mode — all selected */
+.grid-mode .project-row {
+  grid-template-columns: 1fr;
+}
+
+.grid-mode .project-image {
+  height: 160px;
+  order: -1;
+}
+
+.grid-mode .project-info p {
+  display: none;
+}
+
+.grid-mode .project-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.grid-mode .showcase-header {
+  padding: 14px 16px 10px;
+}
+
+/* .grid-mode .showcase-panel {
+  background: transparent;
+  border: none;
+  margin-bottom: 8px;
+} */
+
+/* .grid-mode .showcase-panel .showcase-header {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(56, 65, 75, 0.5);
+  padding: 0 0 8px 0;
+} */
+
+.project-row {
+  transition: background 0.15s, opacity 0.25s, transform 0.25s;
+}
+
+.grid-mode .project-box {
+  transition: gap 0.3s;
+}
+
+.selected-works {
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
