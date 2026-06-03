@@ -74,6 +74,12 @@
   }
 
   .nav-left { display: flex; gap: 8px; }
+
+  .nav-left-1, .nav-left-2 {
+    display: flex;
+    gap: 8px;
+  }
+
   .nav-center { 
     font-size: 16px; 
     font-weight: 500; 
@@ -91,7 +97,8 @@
     /* border: 0.5px solid var(--pill-border); */
     border-radius: 1000px;
     padding: 12px 20px;
-    font-size: 13px;
+    /* font-size: 13px; */
+    font-size: (clamp(8px, 13px, 13px));
     font-weight: 400;
     color: rgba(0, 0, 0, 0.60);
     background: rgba(255, 255, 255, 0.25);
@@ -407,24 +414,46 @@
   .footer-links a:hover { color: rgba(30,25,20,0.9); }
 
   /* RESPONSIVE */
+  @media (max-width: 988px) {
+    /* .nav-center { display: none; } */
+    .nav-right { display: none; }
+    .nav-left {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .projects-layout { grid-template-columns: 1fr; }
+    .categories-panel { position: static; display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; }
+    .categories-panel h3 { display: none; }
+    .category-item p { display: none; }
+    .project-row { grid-template-columns: 1fr; }
+    .project-image { height: 160px; order: -1; }
+
+  }
+
   @media (max-width: 700px) {
     nav { padding: 8px 14px; }
-    .nav-center { display: none; }
+    /* .nav-center { display: none; } */
     .hero { padding: 20px 14px 25px; transform: translateX(7px);}
     .photo-strip { padding: 16px 14px 0; }
     .photo-card { width: 110px; }
     .photo-card img { height: 84px; }
     hr.section-divider { margin: 20px 14px 0; }
     .projects-section { padding: 24px 14px 36px; }
-    .projects-layout { grid-template-columns: 1fr; }
-    .categories-panel { position: static; display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; }
-    .categories-panel h3 { display: none; }
+    /* .projects-layout { grid-template-columns: 1fr; } */
+    /* .categories-panel { position: static; display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; } */
+    /* .categories-panel h3 { display: none; } */
     .category-item { margin: 0; padding: 8px 10px; }
-    .category-item p { display: none; }
-    .project-row { grid-template-columns: 1fr; }
-    .project-image { height: 160px; order: -1; }
+    /* .category-item p { display: none; } */
+    /* .project-row { grid-template-columns: 1fr; }
+    .project-image { height: 160px; order: -1; } */
     footer { flex-direction: column; align-items: flex-start; gap: 20px; padding: 32px 24px 28px;}
     .footer-links { align-items: flex-start; }
+  }
+
+  @media (max-width: 575px) {
+    .nav-center { display: none; }
+    .nav-left {width: 100%; justify-content: space-between; gap: 4px;}
+    .nav-left-1, .nav-left-2 {display:contents}
   }
 
   @media (max-width: 480px) {
@@ -435,6 +464,10 @@
     .nav-left {width: 100%; gap: auto; justify-content: space-between;}
     .nav-left .pill {width: 100%;}
     
+  }
+
+  @media (max-width: 430px) {
+    .pill { font-size: 12px;}
   }
 
   /* Fade-in on load */
@@ -548,10 +581,14 @@
 <!-- NAV -->
 <nav>
   <div class="nav-left">
-    <a href="#projects" class="pill">projects</a>
-    <a href="#writings" class="pill">writings</a>
-    <a href="#about" class="pill">about me</a>
-    <a href="#contact" class="pill">contact</a>
+    <div class="nav-left-1">
+      <a href="#projects" class="pill">projects</a>
+      <a href="#writings" class="pill">writings</a>
+    </div>
+    <div class="nav-left-2">
+      <a href="#about" class="pill">about me</a>
+      <a href="#contact" class="pill">contact</a>
+    </div>
   </div>
   <div class="nav-center">Ryan Pham</div>
   <div class="nav-right">
