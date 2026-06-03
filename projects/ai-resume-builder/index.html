@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Resume Builder</title>
+<link rel="icon" href="/images/favicon.svg" sizes="any" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+
+</head>
+
+<body>
+<a href="/" class="home-fab" aria-label="Home">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-left-1">
+      <a href="/projects/" class="pill">projects</a>
+      <a href="/writing/" class="pill">writings</a>
+    </div>
+    <div class="nav-left-2">
+      <a href="/about/" class="pill">about me</a>
+      <a href="/contact/" class="pill">contact</a>
+    </div>
+  </div>
+  <div class="nav-center">
+    <a href="/">Ryan Pham</a>
+  </div>
+  <div class="nav-right">
+    <div class="pill now-playing-pill" id="now-playing" onclick="togglePlay()">
+      <div class="np-disc" id="np-disc">
+        <img src="/images/placeholder.jpg" id="np-cover" alt="cover">
+      </div>
+      <div class="np-info">
+        <div class="np-info">
+          <span class="np-label" id="np-label">- · -</span>
+          <div class="np-bar-track">
+            <div class="np-bar-fill" id="np-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="pill">melbourne, au</span>
+    <span class="pill" id="clock">--:--:--</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>
+    AI Resume Builder
+  </h1>
+</section>
+
+<hr class="section-divider">
+<!-- FOOTER -->
+ <hr class="section-divider">
+
+<footer>
+  <div class="footer-name">Ryan Pham</div>
+  <div class="footer-links">
+    <a href="mailto:hello@ryanapham.com" target="_blank" rel="noopener noreferrer">Email</a>
+    <a href="https://github.com/pookiesaurus" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://linkedin.com/in/phamaryan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+</footer>
+<script src="/script.js" defer></script>
+</body>
+</html>
