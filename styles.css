@@ -578,3 +578,29 @@ white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
 }
+
+.home-fab {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1000px;
+  padding: 12px 24px;
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.66);
+  text-decoration: none;
+  white-space: nowrap;
+  z-index: 200;
+}
+
+.home-fab:hover { background: rgba(255,255,255,0.45); }
+
+@media (max-width: 575px) {
+  .home-fab { display: block; }
+}
