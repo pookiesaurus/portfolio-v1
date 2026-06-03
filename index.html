@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
-<script src="/script.js" defer></script>
+
 </head>
 
 <body>
@@ -34,11 +34,11 @@
   <div class="nav-right">
     <div class="pill now-playing-pill" id="now-playing" onclick="togglePlay()">
       <div class="np-disc" id="np-disc">
-        <img src="YOUR_COVER_URL" id="np-cover" alt="cover">
+        <img src="/images/placeholder.jpg" id="np-cover" alt="cover">
       </div>
       <div class="np-info">
         <div class="np-info">
-          <span class="np-label" id="np-label">Song Title · Artist Name</span>
+          <span class="np-label" id="np-label">- · -</span>
           <div class="np-bar-track">
             <div class="np-bar-fill" id="np-bar"></div>
           </div>
@@ -301,6 +301,7 @@
     <a href="https://linkedin.com/in/phamaryan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </div>
 </footer>
-
+<script src="/script.js" defer></script>
+<script src="/scripts/home.js" defer></script>
 </body>
 </html>
