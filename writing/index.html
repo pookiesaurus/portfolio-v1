@@ -63,6 +63,182 @@
 </section>
 
 <hr class="section-divider">
+
+<section class="writings-section">
+  <div class="writings-layout">
+ 
+    <!-- FILTER SIDEBAR -->
+    <div class="filter-panel">
+      <h3>Filter</h3>
+ 
+      <div class="filter-group" onclick="toggleGroup(this)">
+        <div class="filter-group-header">
+          <h4>Date</h4>
+          <span class="filter-chevron">▾</span>
+        </div>
+        <div class="filter-options">
+          <label class="filter-option">
+            <input type="checkbox" value="2025" onchange="applyFilters()"> 2025
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="2024" onchange="applyFilters()"> 2024
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="2023" onchange="applyFilters()"> 2023
+          </label>
+        </div>
+      </div>
+ 
+      <div class="filter-group" onclick="toggleGroup(this)">
+        <div class="filter-group-header">
+          <h4>Topic</h4>
+          <span class="filter-chevron">▾</span>
+        </div>
+        <div class="filter-options">
+          <label class="filter-option">
+            <input type="checkbox" value="design" onchange="applyFilters()"> Design
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="tech" onchange="applyFilters()"> Technology
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="culture" onchange="applyFilters()"> Culture
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="personal" onchange="applyFilters()"> Personal
+          </label>
+        </div>
+      </div>
+ 
+      <div class="filter-group" onclick="toggleGroup(this)">
+        <div class="filter-group-header">
+          <h4>Word count</h4>
+          <span class="filter-chevron">▾</span>
+        </div>
+        <div class="filter-options">
+          <label class="filter-option">
+            <input type="checkbox" value="short" onchange="applyFilters()"> Short (&lt;500)
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="medium" onchange="applyFilters()"> Medium (500–1500)
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="long" onchange="applyFilters()"> Long (&gt;1500)
+          </label>
+        </div>
+      </div>
+ 
+      <div class="clear-filters" id="clearBtn" onclick="clearFilters()">Clear filters</div>
+    </div>
+ 
+    <!-- ARTICLES -->
+    <div class="articles-panel" id="articlesPanel">
+ 
+      <a href="#" style="text-decoration: none; color: inherit; display: contents;">
+      <div class="article-row" data-year="2025" data-topic="design" data-length="long">
+        <h3>Really cool title #7</h3>
+        <p>An exploration of how systematic design thinking can reshape the way we approach everyday problems — from interface flows to physical spaces and beyond.</p>
+        <div class="article-meta">
+          <span class="meta-dot">12 Mar 2025</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot">2,400 words</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot"><span class="topic-tag">Design</span></span>
+        </div>
+      </div>
+      </a>
+ 
+      <a href="#" style="text-decoration: none; color: inherit; display: contents;">
+      <div class="article-row" data-year="2025" data-topic="tech" data-length="medium">
+        <h3>Really cool title #6</h3>
+        <p>Looking at how AI tooling is quietly changing creative workflows — and whether that's something to embrace or resist as a designer who codes.</p>
+        <div class="article-meta">
+          <span class="meta-dot">01 Feb 2025</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot">1,100 words</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot"><span class="topic-tag">Technology</span></span>
+        </div>
+      </div>
+      </a>
+      
+      <a href="#" style="text-decoration: none; color: inherit; display: contents;">
+      <div class="article-row" data-year="2024" data-topic="design" data-length="medium">
+        <h3>Really cool title #5</h3>
+        <p>A group project where we conducted user research, design thinking, and digital prototyping. Reflections on what worked, what didn't, and what we'd do differently.</p>
+        <div class="article-meta">
+          <span class="meta-dot">18 Nov 2024</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot">900 words</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot"><span class="topic-tag">Design</span></span>
+        </div>
+      </div>
+      </a>
+ 
+      <a href="#" style="text-decoration: none; color: inherit; display: contents;">
+      <div class="article-row" data-year="2024" data-topic="culture" data-length="long">
+        <h3>Really cool title #4</h3>
+        <p>On the quiet cultural shift happening in Melbourne's creative scene — new venues, new energies, and what it means to make things in a city still finding its identity.</p>
+        <div class="article-meta">
+          <span class="meta-dot">29 Aug 2024</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot">1,800 words</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot"><span class="topic-tag">Culture</span></span>
+        </div>
+      </div>
+      </a>
+ 
+      <a href="#" style="text-decoration: none; color: inherit; display: contents;">
+      <div class="article-row" data-year="2024" data-topic="personal" data-length="short">
+        <h3>Really cool title #3</h3>
+        <p>Notes from a week without screens — what I noticed, missed, and didn't.</p>
+        <div class="article-meta">
+          <span class="meta-dot">04 Jun 2024</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot">420 words</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot"><span class="topic-tag">Personal</span></span>
+        </div>
+      </div>
+      </a>
+ 
+      <a href="#" style="text-decoration: none; color: inherit; display: contents;">
+      <div class="article-row" data-year="2023" data-topic="tech" data-length="long">
+        <h3>Really cool title #2</h3>
+        <p>A deep dive into the TCP/IP stack, framing, and what building a networked game in C actually taught me about how the internet works at a low level.</p>
+        <div class="article-meta">
+          <span class="meta-dot">15 Oct 2023</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot">2,100 words</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot"><span class="topic-tag">Technology</span></span>
+        </div>
+      </div>
+      </a>
+ 
+      <a href="#" style="text-decoration: none; color: inherit; display: contents;">
+      <div class="article-row" data-year="2023" data-topic="design" data-length="short">
+        <h3>Really cool title #1</h3>
+        <p>First thoughts on switching from a playful aesthetic to something more editorial — why Swiss design principles keep pulling me back in.</p>
+        <div class="article-meta">
+          <span class="meta-dot">02 Mar 2023</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot">380 words</span>
+          <span class="meta-dot star">✦</span>
+          <span class="meta-dot"><span class="topic-tag">Design</span></span>
+        </div>
+      </div>
+      </a>
+ 
+      <div class="empty-state" id="emptyState">No articles match the current filters.</div>
+ 
+    </div>
+ 
+  </div>
+</section>
+
 <!-- FOOTER -->
  <hr class="section-divider">
 
@@ -75,5 +251,6 @@
   </div>
 </footer>
 <script src="/script.js" defer></script>
+<script src="/scripts/writings.js" defer></script>
 </body>
 </html>
