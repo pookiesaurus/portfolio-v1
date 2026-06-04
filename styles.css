@@ -843,6 +843,7 @@ nav { padding: 8px 14px; }
 .photo-card img { height: 84px; }  */
 hr.section-divider { margin: 20px 14px 0; }
 .projects-section { padding: 24px 14px 36px; }
+.writings-section {padding: 24px 14px 36px;}
 /* .projects-layout { grid-template-columns: 1fr; } */
 /* .categories-panel { position: static; display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; } */
 /* .categories-panel h3 { display: none; } */
