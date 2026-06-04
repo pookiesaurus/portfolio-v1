@@ -26,6 +26,7 @@ html {
 scroll-behavior: smooth; 
 /* overscroll-behavior: none; */
 background: linear-gradient(to bottom, #ff5733 50%, #33e3ff 50%);
+/* width: 100vw; */
 }
 
 body {
@@ -1094,7 +1095,7 @@ text-overflow: ellipsis;
 }
 
 @media (max-width: 700px) {
-body {width: 100vw;}
+/* body {width: 100vw;} */
 nav { padding: 8px 14px; }
 /* .nav-center { display: none; } */
 .hero { padding: 20px 14px 25px; padding-right: 0px; transform: translateX(7px); width: fit-content;}
