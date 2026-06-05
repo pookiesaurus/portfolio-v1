@@ -403,6 +403,7 @@ footer .footer-name {
 font-size: clamp(28px, 5vw, 48px);
 font-weight: 600;
 color: rgba(0, 0, 0, 0.53);
+line-height: 0.8;
 /* letter-spacing: -0.02em; */
 }
 
