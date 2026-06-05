@@ -1,7 +1,26 @@
 // Snippets scroll buttons
+  function getSnippetsScrollAmount(el) {
+    const firstCard = el.querySelector('.photo-card');
+    if (!firstCard) return 205;
+
+    const cardWidth = firstCard.getBoundingClientRect().width || 205;
+    const gapValue = parseFloat(getComputedStyle(el).gap) || 10;
+    const visibleCards = Math.floor((el.clientWidth + gapValue) / (cardWidth + gapValue));
+
+    let amount;
+    if (visibleCards < 4) {
+      amount = cardWidth * 2 + gapValue;
+    } else {
+      const cardsToScroll = Math.max(1, visibleCards - 2);
+      amount = cardsToScroll * cardWidth + Math.max(0, cardsToScroll - 1) * gapValue;
+    }
+
+    return Math.max(cardWidth, Math.round(amount));
+  }
+
   function scrollSnippets(dir) {
     const el = document.getElementById('snippetsScroll');
-    const amount = 200; 
+    const amount = getSnippetsScrollAmount(el);
     el.scrollBy({ left: dir * amount, behavior: 'smooth' });
   }
  

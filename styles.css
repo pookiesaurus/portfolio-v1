@@ -979,7 +979,7 @@ text-overflow: ellipsis;
     display: block;
   }
 
-  .book {aspect-ratio: 1 / 1.5;}
+  .book {aspect-ratio: 39 / 64;}
 
   .album {aspect-ratio: 1;}
 
@@ -1040,10 +1040,9 @@ text-overflow: ellipsis;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    border: 0.5px solid rgba(255,255,255,0.55);
     background: rgba(255,255,255,0.55);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -1053,10 +1052,10 @@ text-overflow: ellipsis;
     justify-content: center;
     color: rgba(0,0,0,0.65);
     transition: opacity 0.25s ease, background 0.15s ease;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    border: none;
   }
   .scroll-btn:hover:not(.dimmed) { background: rgba(255,255,255,0.8); }
-  .scroll-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .scroll-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
   .scroll-btn.left  { left: -6px; }
   .scroll-btn.right { right: -6px; }
   .scroll-btn.dimmed {
