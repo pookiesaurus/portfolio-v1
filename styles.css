@@ -744,16 +744,25 @@ text-overflow: ellipsis;
     padding: 20px 20px 18px;
     cursor: pointer;
     transition: background 0.15s, opacity 0.25s, max-height 0.3s;
-    max-height: 300px;
+    /* max-height: 160px; */
     overflow: hidden;
     margin-bottom: 16px;
     background: rgba(255,255,255,0.3);
+    opacity: 1;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.25s ease,
+              margin-bottom 0.4s ease,
+              padding 0.5s;
   }
   .article-row:last-child { border-bottom: none; }
   .article-row:hover { background: rgba(255,255,255,0.28); }
  
   .article-row.hidden {
-    display: none;
+    /* max-height: 0; */
+    opacity: 0;
+    margin-bottom: 0;
+    height: 0;
+    padding: 0;
   }
  
   .article-row h3 {

@@ -1,3 +1,25 @@
+  function hideRow(row) {
+  const h = row.scrollHeight;
+  row.style.maxHeight = h + 'px';
+  row.style.opacity = '1';
+  row.style.padding = '0 20px 0';
+  
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      row.style.maxHeight = '0px';
+      row.style.opacity = '0';
+      row.style.marginBottom = '0';
+    });
+  });
+}
+
+function showRow(row) {
+  row.style.maxHeight = '150px';
+  row.style.opacity = '1';
+  row.style.marginBottom = '16px';
+  row.style.padding = '20px 20px 18px';
+}
+  
   // Toggle filter accordion (stop propagation so checkboxes inside don't retrigger)
   function toggleGroup(el) {
     // Only toggle when clicking the header area, not the options themselves
@@ -29,10 +51,20 @@
       const lenMatch   = !checked.length.length || checked.length.includes(row.dataset.length);
  
       if (yearMatch && topicMatch && lenMatch) {
-        row.classList.remove('hidden');
+        // row.classList.remove('hidden');
+        // row.style.maxHeight = row.scrollHeight + 'px';
+        showRow(row);
         visible++;
       } else {
-        row.classList.add('hidden');
+        // row.classList.add('hidden');
+
+        // // Pin to actual height first so it animates from real size → 0
+        // row.style.maxHeight = row.scrollHeight + 'px';
+        // // Force a reflow so the browser registers the starting value
+        // row.offsetHeight;
+        // row.classList.add('hidden');
+        // row.style.maxHeight = '0px';
+        hideRow(row);
       }
     });
  
