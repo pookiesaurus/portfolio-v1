@@ -34,7 +34,9 @@ function showRow(row) {
   // Apply filters
   function applyFilters() {
     const checked = {
-      year:   [...document.querySelectorAll('input[value="2025"], input[value="2024"], input[value="2023"]')].filter(c=>c.checked).map(c=>c.value),
+      // year:   [...document.querySelectorAll('input[value="2026"], input[value="2025"], input[value="2024"], input[value="2023"]')].filter(c=>c.checked).map(c=>c.value),
+            year:   [...document.querySelectorAll('input[value="2026"]')].filter(c=>c.checked).map(c=>c.value),
+
       topic:  [...document.querySelectorAll('input[value="design"], input[value="tech"], input[value="culture"], input[value="personal"]')].filter(c=>c.checked).map(c=>c.value),
       length: [...document.querySelectorAll('input[value="short"], input[value="medium"], input[value="long"]')].filter(c=>c.checked).map(c=>c.value),
     };
@@ -47,7 +49,9 @@ function showRow(row) {
  
     rows.forEach(row => {
       const yearMatch  = !checked.year.length   || checked.year.includes(row.dataset.year);
-      const topicMatch = !checked.topic.length  || checked.topic.includes(row.dataset.topic);
+      // const topicMatch = !checked.topic.length  || checked.topic.includes(row.dataset.topic);
+      const rowTopics  = (row.dataset.topic || '').split(' ');
+      const topicMatch = !checked.topic.length  || checked.topic.some(t => rowTopics.includes(t));
       const lenMatch   = !checked.length.length || checked.length.includes(row.dataset.length);
  
       if (yearMatch && topicMatch && lenMatch) {
