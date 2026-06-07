@@ -1076,7 +1076,7 @@ text-overflow: ellipsis;
 
   /* RESPONSIVE */
 @media (max-width: 1200px) {
-  .exp-row {}
+  /* .exp-row {} */
   .exp-right {display: none;}
 }
 
