@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Interface Design</title>
+<link rel="icon" href="/images/favicon.svg" sizes="any" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hi, I'm Ryan!">
+<meta property="og:description" content="UI/UX and CompSci Student">
+<meta property="og:image" content="https://www.ryanapham.com/images/opengraph.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hi, I'm Ryan!">
+<meta name="twitter:description" content="UI/UX and CompSci Student">
+<meta name="twitter:image" content="https://www.ryanapham.com/images/opengraph.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+
+</head>
+
+<body>
+<a href="/" class="home-fab" aria-label="Home">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-left-1">
+      <a href="/projects/" class="pill">projects</a>
+      <a href="/writing/" class="pill">writings</a>
+    </div>
+    <div class="nav-left-2">
+      <a href="/about/" class="pill">about me</a>
+      <a href="/contact/" class="pill">contact</a>
+    </div>
+  </div>
+  <div class="nav-center">
+    <a href="/">Ryan Pham</a>
+  </div>
+  <div class="nav-right">
+    <div class="pill now-playing-pill" id="now-playing" onclick="togglePlay()">
+      <div class="np-disc" id="np-disc">
+        <img src="/images/placeholder.jpg" id="np-cover" alt="cover">
+      </div>
+      <div class="np-info">
+        <div class="np-info">
+          <span class="np-label" id="np-label">- · -</span>
+          <div class="np-bar-track">
+            <div class="np-bar-fill" id="np-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="pill">melbourne, au</span>
+    <span class="pill" id="clock">--:--:--</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>
+    Advanced Interface Design
+  </h1>
+</section>
+
+<hr class="section-divider">
+
+<!-- REFLECTION CONTENT -->
+<section class="about-body">
+  <div class="outer-card">
+
+    <!-- Individual Contribution -->
+    <div class="top-split">
+      <div class="left-col">
+        <div class="intro-section">
+          <p class="sec-label">Individual Contribution</p>
+          <div class="intro-text">
+            <p>For the group project, I took on the role of a visual director and a leader in some aspects. At the start of each of the group assignments, I was in charge of breaking down the tasks that needed to be done and setting a timeline for completion.</p>
+            <p>I had also introduced collaborative frameworks that resulted in a fair selection of ideas. For example, affinity mapping after an rapid ideation session, and then narrowing down on results via voting for our favourites. This rigid-sounding structure was still open for debate, such that team members could voice their opinion if the resultant idea didn’t align with the project guidelines or if there was a better idea. </p>
+            <div class="aip-images">
+          <div class="aip-image">
+            <img src="/images/aip/Screenshot (265).png" alt="placeholder">
+          </div>
+          <div class="aip-image">
+            <img src="/images/aip/Screenshot (266).png" alt="placeholder">
+          </div>
+          <div class="aip-image">
+            <img src="/images/aip/Screenshot (267).png" alt="placeholder">
+          </div>
+        </div>
+            <p>During our team meetings, I also raised task completion, checking in on our progress to encourage the team to meet the deadline. I also worked to ensure that everyone’s ideas were heard, amalgamated and refined to produce an end result that we could equally share.</p>
+            <p>For the slides themselves, I was the visual director. I had implemented a cohesive design system for each slide deck that included fonts, colours, creative direction. I also produced the visuals for the slide decks as well, matching them to the theme of the presentation whilst ensuring aesthetic quality.</p>
+         <div class="aip-images">
+          <div class="aip-image">
+            <img src="/images/aip/image 118.png" alt="placeholder">
+          </div>
+          <div class="aip-image">
+            <img src="/images/aip/image 119.png" alt="placeholder">
+          </div>
+          <div class="aip-image">
+            <img src="/images/aip/image 120.png" alt="placeholder">
+          </div>
+        </div>
+            <p>Overall, we had a fair distribution of the work itself. Each member collaborated to ideas, analysis, and writing up the slide deck. I had recorded the content for the video and edited it together. I was also in charge of the final editing and revising, in which I ensured cohesiveness and checked for spelling, grammatical and logical flaws.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="right-section">
+          <p class="sec-label lesser-bottom-margin">The Use of AI in UX</p>
+          <div class="intro-text">
+            <p>The use of AI in iterative prototyping and UX is one that should be carefully considered. Throughout this subject, I had the experience of playing around with AI in the different areas of UX, as well as had an insight into how AI is evolving, and the future it might have on the profession.</p>
+            <p>With regards to conversational AI, I believe that there are many benefits and advantages to its use, however, it should be considered and intentional.</p>
+            <p>In the first group assignment, we had the daunting task of mapping the Entertainment and Cultural Experience problem space. After we had collectively exhausted our ideas of what constituted that space, we turned to generative AI tools in order to help us expand our breadth of knowledge and explore other facets of the space. In this case, AI was a supplementary tool that helped us to figure out what we didn’t know. </p>
+            <p>In terms of doing research like this, I think that AI is very valuable. We had centred our knowledge before inviting a LLM to contribute what it knows. This allowed for something original and ours, with the enhancement of an artificial intelligence. I find the balance to be broken when no human thought or experience is accounted for before AI is introduced into the equation. If the work is purely AI, what is the value the human is bringing. UX is grounded in the consideration of another’s experience. If the AI is doing all the considering, then the human is not doing the UX.</p>
+            <p>I also had the chance to experiment with AI tools such as Google Stitch and Figma Make, which can generate full interfaces from prompts. These tools enabled a rapid prototyping experience. I found that the prototypes that came out of the tools were rudimentary and uninspired. Perhaps it was a limitation of the model or of the prompts, but there was a quality about it that read as “AI-generated”. I think that these platforms offer a jumping off point, from where the user can refine the product further.</p>
+            <p>Whether I agree with AI in the UX space or not, I must admit that it seems to be inevitable. With that change, UX professionals must prepare to shift their skillsets as well. It is no longer enough to know how to craft a product. We must learn to adapt by reframing our usefulness and purpose in this cut-throat industry. As it has been taught in this subject, we must focus on broader ideas such as systems thinking, judgement, and responsibility. It is only then that we can hold onto that core tenet of UX; a care for the user.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What I Learned -->
+    <div class="exp-section">
+      <p class="sec-label">What I Learned This Semester</p>
+      <div class="intro-text">
+        <p>This semester, I have begun to look beyond the surface. I have challenged myself to keep digging deeper, to explore more and to question more.</p>
+        <p>Through the exploration of units such as systems thinking, SDG impacts, and the preferred future, I have learnt about the broader world the technologies we design reside in. How they fit into the world? How they are influenced by the systems that make up the world? How they might shape a potential future?</p>
+        <p>The units exploring novel non-screen based interactions and agentic AI exposed me to a new idea of what design is. It really showed me how I can transfer the skills from traditional interface design to something more abstract. This experience has shown me how design at its core is a framework. Once you have grasped the thinking around it, you can apply it anything around you.</p>
+        <p>I will take these teachings and continue to enquire about the world around me as it shifts and rapidly evolves. I think through that collaborative, iterative exploration, that we can find the answer to what UX means, and how we fit into the broader world, even through change and uncertainty. I will also look for industry experience to understand on a daily basis what is changing, and how I can stay on top of it all.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+ <hr class="section-divider">
+
+<footer>
+  <div class="footer-name">Ryan Pham</div>
+  <div class="footer-links">
+    <a href="mailto:hello@ryanapham.com" target="_blank" rel="noopener noreferrer">Email</a>
+    <a href="https://github.com/pookiesaurus" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://linkedin.com/in/phamaryan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://instagram.com/ryan.pham.design" target="_blank" rel="noopener noreferrer">Instagram</a>
+  </div>
+</footer>
+<script src="/script.js" defer></script>
+</body>
+</html>
