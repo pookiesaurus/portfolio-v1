@@ -19,7 +19,15 @@
 --pill-border: rgba(255,255,255,0.4);
 --left-right-padding: 35px;
 --subheading: #38414B;
---inner-bg: rgba(255,255,255,0.3);
+--inner-bg: var(--glass-background);
+
+
+--glass-background: linear-gradient(180deg, rgba(255, 255, 255, 0.219), rgba(214, 214, 214, 0.336));
+--glass-border: 1px solid rgba(255, 255, 255, 0.15);
+--glass-border-top: rgba(255, 255, 255, 0.192);
+--glass-border-bottom: rgba(255, 255, 255, 0.034);
+--glass-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.18) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.05) inset, 0 0 0 0.5px rgba(0, 0, 0, 0.082), 0 24px 60px rgba(0, 0, 0, 0.11), 0 6px 16px rgba(0, 0, 0, 0.048);
+
 }
 
 html { 
@@ -103,6 +111,14 @@ transition: background 0.15s, border-color 0.15s;
 backdrop-filter: blur(10px);
 -webkit-backdrop-filter: blur(10px);
 text-align: center;
+
+
+background: linear-gradient(180deg, rgba(180, 180, 180, 0.219), rgba(214, 214, 214, 0.336));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.192);
+    border-bottom-color: rgba(255, 255, 255, 0.034);
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.18) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.05) inset, 0 0 0 0.5px rgba(0, 0, 0, 0.082), 0 24px 60px rgba(0, 0, 0, 0.11), 0 6px 16px rgba(0, 0, 0, 0.048);
+
 }
 .pill:hover { background: rgba(255,255,255,0.32); }
 
@@ -209,7 +225,10 @@ overflow: hidden;
 
 /* CATEGORIES SIDEBAR */
 .categories-panel {
-background: rgba(255,255,255,0.3);
+background: var(--glass-background);
+border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
 border-radius: 10px;
 padding: 14px;
 padding-bottom: 2px;
@@ -232,7 +251,10 @@ border-radius: 8px;
 cursor: pointer;
 transition: background 0.15s;
 margin-bottom: 12px;
-background: rgba(255,255,255,0.3);
+background: var(--glass-background);
+border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
 }
 .category-item:hover, .category-item.active { background: rgba(255,255,255,0.55); }
 .category-item h4 {
@@ -249,7 +271,10 @@ line-height: 1.4;
 
 /* SHOWCASE PANELS */
 .showcase-panel {
-background: rgba(255,255,255,0.3);
+background: var(--glass-background);
+border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
 border-radius: 10px;
 overflow: hidden;
 /* smooth collapse */
@@ -291,11 +316,16 @@ display: grid;
 grid-template-columns: 1fr 400px;
 gap: 24px;
 padding: 20px 16px;
-background: rgba(255,255,255,0.3);
+background: var(--glass-background);
 cursor: pointer;
 transition: background 0.15s;
 align-items: stretch;
 border-radius: 8px;
+
+border: var(--glass-border);
+border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
 }
 .project-row:last-child { border-bottom: none; }
 .project-row:hover { background: rgba(255,255,255,0.55); }
@@ -364,7 +394,10 @@ height: 250px;
 width: 100%;
 border-radius: 8px;
 overflow: hidden;
-background: rgba(255, 255, 255, 0.3);
+background: var(--glass-background);
+border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
 display: flex;
 align-items: center;
 justify-content: center;
@@ -624,7 +657,10 @@ text-overflow: ellipsis;
  
   /* FILTER SIDEBAR */
   .filter-panel {
-    background: rgba(255,255,255,0.3);
+    background: var(--glass-background);
+    border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
     border-radius: 10px;
     padding: 14px;
     padding-bottom: 2px;
@@ -646,7 +682,10 @@ text-overflow: ellipsis;
     transition: background 0.15s;
     margin-bottom: 12px;
     user-select: none;
-    background: rgba(255,255,255,0.3);
+    background: var(--glass-background);
+    border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
   }
   .filter-group:hover { background: rgba(255,255,255,0.4); }
   .filter-group.open   { background: rgba(255,255,255,0.5); }
@@ -748,7 +787,10 @@ text-overflow: ellipsis;
     /* max-height: 160px; */
     overflow: hidden;
     margin-bottom: 16px;
-    background: rgba(255,255,255,0.3);
+    background: var(--glass-background);
+    border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
     opacity: 1;
     transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1),
               opacity 0.25s ease,
@@ -872,14 +914,20 @@ text-overflow: ellipsis;
   /* right col sections stacked with dividers */
   .right-section {
     padding: 16px;
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--glass-background);
+    border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
    border-radius: 12px;
 
   }
 
   /* ── INTRO ── */
   .intro-section {
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--glass-background);
+    border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
     padding: 16px;
     border-radius: 10px;
     height: 100%;
@@ -899,7 +947,10 @@ text-overflow: ellipsis;
   .exp-section {
     border-radius: 10px;
     padding: 16px;
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--glass-background);
+    border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
   }
 
   .exp-rows { display: flex; flex-direction: column; gap: 8px; margin-top: 2px; }
@@ -980,7 +1031,10 @@ text-overflow: ellipsis;
     gap: 8px;
     justify-content: space-between;
   }
-  .media-item { display: flex; flex-direction: row; gap: 10px; width: 100%; max-width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.3); border-radius: 8px;}
+  .media-item { display: flex; flex-direction: row; gap: 10px; width: 100%; max-width: 100%; padding: 10px; background: var(--glass-background); border-radius: 8px;
+  border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);}
   .media-thumb {
     width: 50px;
     aspect-ratio: 1;
