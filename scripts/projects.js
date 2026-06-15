@@ -47,38 +47,70 @@
 
 // filterCategory(document.querySelector('[data-filter="all"]'), 'all');
 
+// function filterCategory(el, filter) {
+//   document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+//   el.classList.add('active');
+
+//   const panels = {
+//     ux:   document.getElementById('panel-ux'),
+//     cs:   document.getElementById('panel-cs'),
+//     misc: document.getElementById('panel-misc'),
+//   };
+
+//   const selectedWorks = document.querySelector('.selected-works');
+
+//   // fade out
+//   selectedWorks.style.opacity = '0';
+//   selectedWorks.style.transform = 'translateY(6px)';
+
+//   setTimeout(() => {
+//     if (filter === 'all') {
+//       Object.values(panels).forEach(p => p.classList.remove('collapsed'));
+//       selectedWorks.classList.add('grid-mode');
+//     } else {
+//       Object.entries(panels).forEach(([key, p]) => {
+//         p.classList.toggle('collapsed', key !== filter);
+//       });
+//       selectedWorks.classList.remove('grid-mode');
+//     }
+
+//     // fade back in
+//     selectedWorks.style.opacity = '1';
+//     selectedWorks.style.transform = 'translateY(0)';
+//   }, 200);
+// }
+
+
+// filterCategory(document.querySelector('[data-filter="all"]'), 'all');
+
+
 function filterCategory(el, filter) {
-  document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.category-item')
+    .forEach(i => i.classList.remove('active'));
+
   el.classList.add('active');
 
   const panels = {
-    ux:   document.getElementById('panel-ux'),
-    cs:   document.getElementById('panel-cs'),
+    ux: document.getElementById('panel-ux'),
+    cs: document.getElementById('panel-cs'),
     misc: document.getElementById('panel-misc'),
   };
 
   const selectedWorks = document.querySelector('.selected-works');
 
-  // fade out
-  selectedWorks.style.opacity = '0';
-  selectedWorks.style.transform = 'translateY(6px)';
+  // toggle grid mode FIRST (CSS handles animation)
+  const isAll = filter === 'all';
 
-  setTimeout(() => {
-    if (filter === 'all') {
-      Object.values(panels).forEach(p => p.classList.remove('collapsed'));
-      selectedWorks.classList.add('grid-mode');
-    } else {
-      Object.entries(panels).forEach(([key, p]) => {
-        p.classList.toggle('collapsed', key !== filter);
-      });
-      selectedWorks.classList.remove('grid-mode');
-    }
+  selectedWorks.classList.toggle('grid-mode', isAll);
 
-    // fade back in
-    selectedWorks.style.opacity = '1';
-    selectedWorks.style.transform = 'translateY(0)';
-  }, 200);
+  // toggle panels (same as version 1)
+  Object.entries(panels).forEach(([key, p]) => {
+    p.classList.toggle('collapsed', !isAll && key !== filter);
+  });
 }
 
-
-filterCategory(document.querySelector('[data-filter="all"]'), 'all');
+// initial state
+filterCategory(
+  document.querySelector('[data-filter="all"]'),
+  'all'
+);
