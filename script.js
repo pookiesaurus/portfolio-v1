@@ -64,8 +64,8 @@
     html.style.background = getColor(t);
   }
 
-  // window.addEventListener("scroll", updateBackground, { passive: true });
-  // updateBackground();
+  window.addEventListener("scroll", updateBackground, { passive: true });
+  updateBackground();
 
   const tracks = [
     {

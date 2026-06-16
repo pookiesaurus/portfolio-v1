@@ -45,7 +45,7 @@ color: var(--text-primary);
 /* background: var(--bg-hero); */
 min-height: 100vh;
 -webkit-font-smoothing: antialiased;
-/* background: linear-gradient(
+background: linear-gradient(
 180deg,
 #506199 0%,
 #6C81AA 16.67%,
@@ -54,11 +54,11 @@ min-height: 100vh;
 #B2C1B6 66.67%,
 #C9C7A7 83.33%,
 #D5B68F 100%
-); */
-background-image: url(/images/backgroundtest.png);
+);
+/* background-image: url(/images/backgroundtest.png);
   background-repeat: no-repeat;
 background-size: cover;  
-background-position: center top;
+background-position: center top; */
    }
 
 
@@ -1094,6 +1094,12 @@ box-shadow: var(--glass-box-shadow);}
     background: var(--inner-bg);
     border-radius: 10px;
     backdrop-filter: blur(10px);
+    background: linear-gradient(180deg, rgba(180, 180, 180, 0.219), rgba(214, 214, 214, 0.336));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.192);
+    border-bottom-color: rgba(255, 255, 255, 0.034);
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.18) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.05) inset, 0 0 0 0.5px rgba(0, 0, 0, 0.082), 0 24px 60px rgba(0, 0, 0, 0.11), 0 6px 16px rgba(0, 0, 0, 0.048);
+
   }
 
 
@@ -1140,8 +1146,8 @@ box-shadow: var(--glass-box-shadow);}
     height: 50px;
     border-radius: 50%;
     background: rgba(255,255,255,0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1149,6 +1155,12 @@ box-shadow: var(--glass-box-shadow);}
     color: rgba(0,0,0,0.65);
     transition: opacity 0.25s ease, background 0.15s ease;
     border: none;
+    background: linear-gradient(180deg, rgba(180, 180, 180, 0.219), rgba(214, 214, 214, 0.336));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.192);
+    border-bottom-color: rgba(255, 255, 255, 0.034);
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.18) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.05) inset, 0 0 0 0.5px rgba(0, 0, 0, 0.082), 0 24px 60px rgba(0, 0, 0, 0.11), 0 6px 16px rgba(0, 0, 0, 0.048);
+
   }
   .scroll-btn:hover:not(.dimmed) { background: rgba(255,255,255,0.8); }
   .scroll-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
