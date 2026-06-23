@@ -43,18 +43,46 @@
     <a href="/">Ryan Pham</a>
   </div>
   <div class="nav-right">
-    <div class="pill now-playing-pill" id="now-playing" onclick="togglePlay()">
-      <div class="np-disc" id="np-disc">
-        <img src="/images/placeholder.jpg" id="np-cover" alt="cover">
-      </div>
-      <div class="np-info">
-        <div class="np-info">
-          <span class="np-label" id="np-label">- · -</span>
-          <div class="np-bar-track">
-            <div class="np-bar-fill" id="np-bar"></div>
-          </div>
+    <div class="pill now-playing-pill t-resize" id="now-playing">
+        <div class="np-main t-resize">
+             <div class="np-disc" id="np-disc">
+                <img src="/images/placeholder.jpg" id="np-cover" alt="cover">
+            </div>
+            <div class="np-info t-resize">
+                <div class="np-info t-resize">
+                    <span class="np-label" id="np-label">- · -</span>
+                <div class="np-bar-track t-resize">
+                    <div class="np-bar-fill" id="np-bar"></div>
+                </div>
+            </div>
         </div>
-      </div>
+        </div>
+        <div class="np-controls t-resize">
+          <div class="np-buttons t-resize">
+            <button class="np-btn prev" id="np-prev" aria-label="Previous track" title="Previous">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM19 6v12L9 12z"/></svg>
+            </button>
+
+            <button class="np-btn play-pause np-play" id="np-playpause" aria-label="Play" title="Play/Pause">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path class="icon-path icon-play" d="M8 5v14l11-7z"/>
+                <path class="icon-path icon-pause" d="M7 5h4v14H7zM13 5h4v14h-4z"/>
+              </svg>
+            </button>
+
+            <button class="np-btn next" id="np-next" aria-label="Next track" title="Next">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 6v12l10-6z"/></svg>
+            </button>
+          </div>  
+          
+
+            <div class="np-bar-track t-resize" id="track2">
+              <div class="np-bar-fill" id="fill2">
+                <div class="np-bar-thumb" id="np-bar-thumb"></div>
+              </div>
+             </div>
+        </div>
+     
     </div>
     <span class="pill">melbourne, au</span>
     <span class="pill" id="clock">--:--:--</span>
