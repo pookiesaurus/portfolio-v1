@@ -67,7 +67,7 @@ background-image: url(/images/backgroundtest3.jpeg);
 background-size: cover;  
 background-position: center top;
 background-attachment: fixed;
-background-color: #67a3ce;
+background-color: #4D87C5;
    }
 
 
@@ -462,11 +462,18 @@ background: rgba(200,195,180,0.4);
 
 /* FOOTER */
 footer {
-background: var(--bg-footer);
+/* background: var(--bg-footer); */
+background-image: url(/images/footer2.png);
+background-repeat: no-repeat;
+background-position: center bottom;
+background-size: cover;
 padding: 32px var(--left-right-padding) 28px;
 display: flex;
 justify-content: space-between;
 align-items: flex-end;
+/* aspect-ratio: 3.95 / 1; */
+aspect-ratio: 1440 / 241;
+width: 100%;
 }
 
 footer .footer-name {
