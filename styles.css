@@ -5,8 +5,7 @@
 
 
 :root {
---bg-hero: #6b6fa8;
---bg-hero: 
+--bg-hero: ;
 --bg-mid: #8a9aaa;
 --bg-footer: #b8b89a00;
 --text-primary: #1a1a1a;
@@ -70,7 +69,7 @@ background-attachment: fixed;
 background-color: #4D87C5;
    }
 
-   body:before {
+   /* body:before {
   content: "";
   display: block;
   position: fixed;
@@ -84,6 +83,16 @@ background-color: #4D87C5;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+} */
+
+.blue-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 200px;
+  width: 100%;
+  background: linear-gradient(180deg, #4D87C5 0%, rgba(77, 135, 197, 0.00) 100%);
 }
 
 /* NAV */

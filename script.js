@@ -14,15 +14,20 @@
 
 
   const html = document.documentElement;
+const body = document.querySelector('body');
+  // const stops = [
+  //   { p: 0.00, c: [80, 97, 153] },     // #506199
+  //   { p: 0.1667, c: [108, 129, 170] }, // #6C81AA
+  //   { p: 0.3333, c: [132, 155, 181] }, // #849BB5
+  //   { p: 0.50, c: [156, 177, 186] },   // #9CB1BA
+  //   { p: 0.6667, c: [178, 193, 182] }, // #B2C1B6
+  //   { p: 0.8333, c: [201, 199, 167] }, // #C9C7A7
+  //   { p: 1.00, c: [213, 182, 143] }    // #D5B68F (fixed end)
+  // ];
 
   const stops = [
-    { p: 0.00, c: [80, 97, 153] },     // #506199
-    { p: 0.1667, c: [108, 129, 170] }, // #6C81AA
-    { p: 0.3333, c: [132, 155, 181] }, // #849BB5
-    { p: 0.50, c: [156, 177, 186] },   // #9CB1BA
-    { p: 0.6667, c: [178, 193, 182] }, // #B2C1B6
-    { p: 0.8333, c: [201, 199, 167] }, // #C9C7A7
-    { p: 1.00, c: [213, 182, 143] }    // #D5B68F (fixed end)
+    { p: 0.00, c: [77, 135, 197] }, // #4D87C5
+    { p: 1.00, c: [130, 188, 104] } // #82BC68
   ];
 
   function lerp(a, b, t) {
@@ -61,11 +66,11 @@
 
     const t = maxScroll > 0 ? scrollTop / maxScroll : 0;
 
-    html.style.background = getColor(t);
+    body.style.backgroundColor = getColor(t);
   }
 
-  // window.addEventListener("scroll", updateBackground, { passive: true });
-  // updateBackground();
+  window.addEventListener("scroll", updateBackground, { passive: true });
+  updateBackground();
 
   const tracks = [
     {
