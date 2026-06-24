@@ -1,12 +1,12 @@
   function hideRow(row) {
   const h = row.scrollHeight;
-  row.style.maxHeight = h + 'px';
+  // row.style.maxHeight = h + 'px';
   row.style.opacity = '1';
   row.style.padding = '0 20px 0';
   
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      row.style.maxHeight = '0px';
+      // row.style.maxHeight = '0px';
       row.style.opacity = '0';
       row.style.marginBottom = '0';
     });
@@ -14,7 +14,7 @@
 }
 
 function showRow(row) {
-  row.style.maxHeight = '150px';
+  // row.style.maxHeight = '150px';
   row.style.opacity = '1';
   row.style.marginBottom = '16px';
   row.style.padding = '20px 20px 18px';
