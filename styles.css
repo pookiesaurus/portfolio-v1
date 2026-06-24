@@ -22,10 +22,12 @@
 --subheading: #38414B;
 --inner-bg: var(--glass-background);
 
---background-img: url(/images/backgroundtest3.jpeg)
+--background-img: url(/images/backgroundtest3.jpeg);
 
 
 --glass-background: linear-gradient(180deg, rgba(255, 255, 255, 0.219), rgba(214, 214, 214, 0.336));
+/* --glass-background: linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(214, 214, 214, 0.153)); */
+
 --glass-border: 1px solid rgba(255, 255, 255, 0.15);
 --glass-border-top: rgba(255, 255, 255, 0.192);
 --glass-border-bottom: rgba(255, 255, 255, 0.034);
@@ -1270,6 +1272,9 @@ box-shadow: var(--glass-box-shadow);}
     background: var(--inner-bg);
     border-radius: 10px;
     backdrop-filter: blur(10px);
+    border-top-color: var(--glass-border-top);
+border-bottom-color: var(--glass-border-bottom);
+box-shadow: var(--glass-box-shadow);
   }
 
 
@@ -1280,6 +1285,7 @@ box-shadow: var(--glass-box-shadow);}
     scrollbar-width: none;
     -ms-overflow-style: none;
     margin-top: 2px;
+    overflow-y: visible;
   }
   .snippets-scroll::-webkit-scrollbar { display: none; }
 
