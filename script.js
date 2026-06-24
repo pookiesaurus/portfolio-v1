@@ -267,3 +267,28 @@ barTrack.addEventListener('pointerdown', (e) => {
 
 loadTrack(currentTrack);
 
+
+
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
+function checkNearBottom() {
+  if (!isMobile()) return; // only run this behavior on mobile widths
+
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const pageHeight = document.documentElement.scrollHeight;
+  const distanceFromBottom = pageHeight - scrollPosition;
+
+  if (distanceFromBottom <= 20) {
+    document.documentElement.style.setProperty('--background-img', `url(/images/background-mobile-bottom.png)`);
+    // document.body.style.backgroundImage = 'url(/images/background-mobile-bottom.png)';
+  } else {
+    document.documentElement.style.setProperty('--background-img', `url(/images/backgroundtest3.jpeg)`);
+    // document.body.style.backgroundImage = 'url(/images/backgroundtest3.jpeg)';
+  }
+}
+
+window.addEventListener('scroll', checkNearBottom, { passive: true });
+window.addEventListener('resize', checkNearBottom);
+checkNearBottom();
