@@ -108,7 +108,205 @@ const body = document.querySelector('body');
   window.addEventListener("scroll", updateBackground, { passive: true });
   updateBackground();
 
-  const tracks = [
+ /* ORIGINAL MUSIC */
+//   const tracks = [
+//     {
+//       title: 'the louvre',
+//       artist: 'lorde',
+//       src: '/audio/track1.mp3',
+//       cover: '/images/cover1.png'
+//     },
+//     {
+//       title: 'born to die',
+//       artist: 'lana del rey',
+//       src: '/audio/track2.mp3',
+//       cover: '/images/cover2.jpg'
+//     },
+//     {
+//       title: 'stupid song',
+//       artist: 'olivia rodrigo',
+//       src: '/audio/track3.mp3',
+//       cover: '/images/cover3.webp'
+//     },
+//     {
+//       title: 'fame is a gun',
+//       artist: 'addison rae',
+//       src: '/audio/track4.mp3',
+//       cover: '/images/cover4.webp'
+//     },
+//     {
+//       title: 'snow angel',
+//       artist: 'reneé rapp',
+//       src: '/audio/track5.mp3',
+//       cover: '/images/cover5.png'
+//     }
+//   ];
+
+//   const audio = new Audio();
+//   audio.volume = 0.1;
+
+//   let isPlaying = false;
+//   let currentTrack = 0;
+//   let isScrubbing = false;
+
+//   const disc = document.getElementById('np-disc');
+//   const cover = document.getElementById('np-cover');
+//   const label = document.getElementById('np-label');
+//   // const titleEl = document.getElementById('np-title');
+//   // const artistEl = document.getElementById('np-artist');
+//   const bar = document.getElementById('np-bar');
+//   const bar2 = document.getElementById('fill2');
+//   const barTrack = document.getElementById('track2');
+//   const thumb = document.getElementById('np-bar-thumb');
+//   const playBtn = document.getElementById('np-playpause');
+//   const pill = document.getElementById('now-playing');
+
+
+//   function loadTrack(i, autoplay) {
+//     // const t = tracks[i];
+//     // audio.src = t.src;
+//     // audio.volume = 0.1;
+//     // document.getElementById('np-label').textContent = `${t.title} · ${t.artist}`;
+//     // document.getElementById('np-cover').src = t.cover;
+//       const t = tracks[i];
+//     audio.src = t.src;
+//     audio.volume = 0.1;
+//     // titleEl.textContent = t.title;
+//     // artistEl.textContent = t.artist;
+//     label.innerHTML = `${t.title} · <span style="color: rgba(0, 0 , 0, 0.45);">${t.artist}</span>`;
+//     cover.src = t.cover;
+//     bar.style.width = '0%';
+//     if (autoplay) {
+//       audio.play().catch(() => {});
+//       setPlaying(true);
+//     }
+//   }
+
+//   function setPlaying(playing) {
+//     isPlaying = playing;
+//     disc.classList.toggle('playing', playing);
+//     playBtn.classList.toggle('np-pause', playing);
+//     playBtn.classList.toggle('np-play', !playing);
+//     playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+//   }
+
+
+//   // function togglePlay() {
+//   //   if (isPlaying) {
+//   //     audio.pause();
+//   //     isPlaying = false;
+//   //     document.getElementById('np-disc').style.animationPlayState = 'paused';
+//   //   } else {
+//   //     audio.play();
+//   //     isPlaying = true;
+//   //     document.getElementById('np-disc').style.animationPlayState = 'running';
+//   //   }
+//   // }
+
+//   function togglePlay() {
+//   if (isPlaying) {
+//     audio.pause();
+//     setPlaying(false);
+//   } else {
+//     audio.play().catch(() => {});
+//     setPlaying(true);
+//   }
+// }
+
+//   function nextTrack() {
+//   currentTrack = (currentTrack + 1) % tracks.length;
+//   loadTrack(currentTrack, isPlaying);
+// }
+
+// function prevTrack() {
+//   currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+//   loadTrack(currentTrack, isPlaying);
+// }
+
+// document.getElementById('np-prev').addEventListener('click', (e) => { e.stopPropagation(); prevTrack(); });
+// document.getElementById('np-next').addEventListener('click', (e) => { e.stopPropagation(); nextTrack(); });
+// playBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); });
+
+//   audio.addEventListener('timeupdate', () => {
+//     if (!audio.duration) return;
+//     const pct = (audio.currentTime / audio.duration) * 100;
+//     bar.style.width = pct + '%';
+//     bar2.style.width = pct + '%';
+//   });
+
+//   audio.addEventListener('ended', () => {
+//     // isPlaying = false;
+//     // document.getElementById('np-disc').style.animationPlayState = 'paused';
+//     // document.getElementById('np-bar').style.width = '0%';
+//     currentTrack = (currentTrack + 1) % tracks.length; // loop playlist
+//     loadTrack(currentTrack);
+
+//     audio.play();
+//     isPlaying = true;
+
+//     document.getElementById('np-disc').style.animationPlayState = 'running';
+//     document.getElementById('np-bar').style.width = '0%';
+//   });
+
+//   // START SCRUBBING
+
+//   /* ---- draggable scrub thumb ---- */
+// function pctFromEvent(e) {
+//   const rect = barTrack.getBoundingClientRect();
+//   const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+//   return Math.min(1, Math.max(0, x / rect.width));
+// }
+
+// function startScrub(e) {
+//   e.stopPropagation();
+//   e.preventDefault();
+//   isScrubbing = true;
+//   bar2.classList.add('scrubbing');
+//   thumb.classList.add('dragging');
+// //   barTrack.classList.add('scrub-active');
+// //   pill.classList.add('scrub-open');
+//   moveScrub(e);
+//   window.addEventListener('pointermove', moveScrub);
+//   window.addEventListener('pointerup', endScrub);
+// }
+
+// function moveScrub(e) {
+//   if (!isScrubbing || !audio.duration) return;
+//   const pct = pctFromEvent(e);
+//   bar2.style.width = (pct * 100) + '%';
+//   audio.currentTime = pct * audio.duration;
+// }
+
+// function endScrub() {
+//   isScrubbing = false;
+//   bar2.classList.remove('scrubbing');
+//   thumb.classList.remove('dragging');
+// //   barTrack.classList.remove('scrub-active');
+// //   pill.classList.remove('scrub-open');
+//   window.removeEventListener('pointermove', moveScrub);
+//   window.removeEventListener('pointerup', endScrub);
+// }
+
+// thumb.addEventListener('pointerdown', startScrub);
+
+// // also allow clicking anywhere on the track to jump
+// barTrack.addEventListener('pointerdown', (e) => {
+//   if (e.target === thumb) return; // already handled
+//   e.stopPropagation();
+//   if (!audio.duration) return;
+//   const pct = pctFromEvent(e);
+//   audio.currentTime = pct * audio.duration;
+//   bar.style.width = (pct * 100) + '%';
+// });
+
+
+//   // END SCRUBBING
+
+// loadTrack(currentTrack);
+
+ /* END ORIGINAL MUSIC */
+
+ const tracks = [
     {
       title: 'the louvre',
       artist: 'lorde',
@@ -147,6 +345,7 @@ const body = document.querySelector('body');
   let isPlaying = false;
   let currentTrack = 0;
   let isScrubbing = false;
+  let lastSave = 0;
 
   const disc = document.getElementById('np-disc');
   const cover = document.getElementById('np-cover');
@@ -160,6 +359,18 @@ const body = document.querySelector('body');
   const playBtn = document.getElementById('np-playpause');
   const pill = document.getElementById('now-playing');
 
+  const NP_STORAGE_KEY = 'npState';
+
+  function saveState() {
+    try {
+      localStorage.setItem(NP_STORAGE_KEY, JSON.stringify({
+        trackIndex: currentTrack,
+        currentTime: audio.currentTime || 0,
+        isPlaying: isPlaying,
+        savedAt: Date.now()
+      }));
+    } catch {}
+  }
 
   function loadTrack(i, autoplay) {
     // const t = tracks[i];
@@ -179,6 +390,7 @@ const body = document.querySelector('body');
       audio.play().catch(() => {});
       setPlaying(true);
     }
+    saveState();
   }
 
   function setPlaying(playing) {
@@ -187,6 +399,7 @@ const body = document.querySelector('body');
     playBtn.classList.toggle('np-pause', playing);
     playBtn.classList.toggle('np-play', !playing);
     playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    saveState();
   }
 
 
@@ -231,6 +444,12 @@ playBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); })
     const pct = (audio.currentTime / audio.duration) * 100;
     bar.style.width = pct + '%';
     bar2.style.width = pct + '%';
+
+    const now = Date.now();
+    if (now - lastSave > 2000) {
+      saveState();
+      lastSave = now;
+    }
   });
 
   audio.addEventListener('ended', () => {
@@ -245,7 +464,10 @@ playBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); })
 
     document.getElementById('np-disc').style.animationPlayState = 'running';
     document.getElementById('np-bar').style.width = '0%';
+    saveState();
   });
+
+  window.addEventListener('beforeunload', saveState);
 
   // START SCRUBBING
 
@@ -284,6 +506,7 @@ function endScrub() {
 //   pill.classList.remove('scrub-open');
   window.removeEventListener('pointermove', moveScrub);
   window.removeEventListener('pointerup', endScrub);
+  saveState();
 }
 
 thumb.addEventListener('pointerdown', startScrub);
@@ -296,13 +519,44 @@ barTrack.addEventListener('pointerdown', (e) => {
   const pct = pctFromEvent(e);
   audio.currentTime = pct * audio.duration;
   bar.style.width = (pct * 100) + '%';
+  saveState();
 });
 
 
   // END SCRUBBING
 
-loadTrack(currentTrack);
+  function restoreState() {
+    let state = null;
+    try {
+      const raw = localStorage.getItem(NP_STORAGE_KEY);
+      if (raw) state = JSON.parse(raw);
+    } catch {}
 
+    if (!state) {
+      loadTrack(currentTrack);
+      return;
+    }
+
+    currentTrack = state.trackIndex ?? 0;
+    const t = tracks[currentTrack];
+    audio.src = t.src;
+    audio.volume = 0.1;
+    label.innerHTML = `${t.title} · <span style="color: rgba(0, 0 , 0, 0.45);">${t.artist}</span>`;
+    cover.src = t.cover;
+
+    audio.addEventListener('loadedmetadata', () => {
+      audio.currentTime = state.currentTime || 0;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      bar.style.width = pct + '%';
+      bar2.style.width = pct + '%';
+
+      if (state.isPlaying) {
+        audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+      }
+    }, { once: true });
+  }
+
+  restoreState();
 
 
 function isMobile() {
