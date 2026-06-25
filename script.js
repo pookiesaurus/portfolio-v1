@@ -442,7 +442,7 @@ function checkNearBottom() {
   const pageHeight = document.documentElement.scrollHeight;
   const distanceFromBottom = pageHeight - scrollPosition;
 
-  if (distanceFromBottom <= 20) {
+  if (distanceFromBottom <= 50) {
     document.documentElement.style.setProperty('--background-img', `url(/images/background-mobile-bottom.png)`);
   } else {
     document.documentElement.style.setProperty('--background-img', `url(/images/backgroundtest3.jpeg)`);
