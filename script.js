@@ -76,20 +76,33 @@ const body = document.querySelector('body');
 
   /* END GRADUAL TRANSITION */
 
-const topColor = "rgb(77, 135, 197)";    // #4D87C5
+  const topColor = "rgb(77, 135, 197)";    // #4D87C5
   const bottomColor = "rgb(130, 188, 104)"; // #82BC68
 
-  function getColor(t) {
-    return t < 0.5 ? topColor : bottomColor;
-  }
+  let currentColor = null;
+  let ticking = false;
 
-  function updateBackground() {
+  function applyColor() {
     const scrollTop = window.scrollY;
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-    const t = maxScroll > 0 ? scrollTop / maxScroll : 0;
+    const t = maxScroll > 0 ? Math.min(1, Math.max(0, scrollTop / maxScroll)) : 0;
 
-    body.style.backgroundColor = getColor(t);
+    const newColor = t < 0.5 ? topColor : bottomColor;
+
+    if (newColor !== currentColor) {
+      currentColor = newColor;
+      body.style.backgroundColor = newColor;
+    }
+
+    ticking = false;
+  }
+
+  function updateBackground() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(applyColor);
+    }
   }
 
   window.addEventListener("scroll", updateBackground, { passive: true });
