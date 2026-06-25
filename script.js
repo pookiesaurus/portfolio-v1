@@ -1,4 +1,4 @@
-  // Clock
+// Clock
   function updateClock() {
     const now = new Date();
     const t = now.toLocaleTimeString('en-AU', {
@@ -108,204 +108,6 @@ const body = document.querySelector('body');
   window.addEventListener("scroll", updateBackground, { passive: true });
   updateBackground();
 
- /* ORIGINAL MUSIC */
-//   const tracks = [
-//     {
-//       title: 'the louvre',
-//       artist: 'lorde',
-//       src: '/audio/track1.mp3',
-//       cover: '/images/cover1.png'
-//     },
-//     {
-//       title: 'born to die',
-//       artist: 'lana del rey',
-//       src: '/audio/track2.mp3',
-//       cover: '/images/cover2.jpg'
-//     },
-//     {
-//       title: 'stupid song',
-//       artist: 'olivia rodrigo',
-//       src: '/audio/track3.mp3',
-//       cover: '/images/cover3.webp'
-//     },
-//     {
-//       title: 'fame is a gun',
-//       artist: 'addison rae',
-//       src: '/audio/track4.mp3',
-//       cover: '/images/cover4.webp'
-//     },
-//     {
-//       title: 'snow angel',
-//       artist: 'reneé rapp',
-//       src: '/audio/track5.mp3',
-//       cover: '/images/cover5.png'
-//     }
-//   ];
-
-//   const audio = new Audio();
-//   audio.volume = 0.1;
-
-//   let isPlaying = false;
-//   let currentTrack = 0;
-//   let isScrubbing = false;
-
-//   const disc = document.getElementById('np-disc');
-//   const cover = document.getElementById('np-cover');
-//   const label = document.getElementById('np-label');
-//   // const titleEl = document.getElementById('np-title');
-//   // const artistEl = document.getElementById('np-artist');
-//   const bar = document.getElementById('np-bar');
-//   const bar2 = document.getElementById('fill2');
-//   const barTrack = document.getElementById('track2');
-//   const thumb = document.getElementById('np-bar-thumb');
-//   const playBtn = document.getElementById('np-playpause');
-//   const pill = document.getElementById('now-playing');
-
-
-//   function loadTrack(i, autoplay) {
-//     // const t = tracks[i];
-//     // audio.src = t.src;
-//     // audio.volume = 0.1;
-//     // document.getElementById('np-label').textContent = `${t.title} · ${t.artist}`;
-//     // document.getElementById('np-cover').src = t.cover;
-//       const t = tracks[i];
-//     audio.src = t.src;
-//     audio.volume = 0.1;
-//     // titleEl.textContent = t.title;
-//     // artistEl.textContent = t.artist;
-//     label.innerHTML = `${t.title} · <span style="color: rgba(0, 0 , 0, 0.45);">${t.artist}</span>`;
-//     cover.src = t.cover;
-//     bar.style.width = '0%';
-//     if (autoplay) {
-//       audio.play().catch(() => {});
-//       setPlaying(true);
-//     }
-//   }
-
-//   function setPlaying(playing) {
-//     isPlaying = playing;
-//     disc.classList.toggle('playing', playing);
-//     playBtn.classList.toggle('np-pause', playing);
-//     playBtn.classList.toggle('np-play', !playing);
-//     playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
-//   }
-
-
-//   // function togglePlay() {
-//   //   if (isPlaying) {
-//   //     audio.pause();
-//   //     isPlaying = false;
-//   //     document.getElementById('np-disc').style.animationPlayState = 'paused';
-//   //   } else {
-//   //     audio.play();
-//   //     isPlaying = true;
-//   //     document.getElementById('np-disc').style.animationPlayState = 'running';
-//   //   }
-//   // }
-
-//   function togglePlay() {
-//   if (isPlaying) {
-//     audio.pause();
-//     setPlaying(false);
-//   } else {
-//     audio.play().catch(() => {});
-//     setPlaying(true);
-//   }
-// }
-
-//   function nextTrack() {
-//   currentTrack = (currentTrack + 1) % tracks.length;
-//   loadTrack(currentTrack, isPlaying);
-// }
-
-// function prevTrack() {
-//   currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-//   loadTrack(currentTrack, isPlaying);
-// }
-
-// document.getElementById('np-prev').addEventListener('click', (e) => { e.stopPropagation(); prevTrack(); });
-// document.getElementById('np-next').addEventListener('click', (e) => { e.stopPropagation(); nextTrack(); });
-// playBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); });
-
-//   audio.addEventListener('timeupdate', () => {
-//     if (!audio.duration) return;
-//     const pct = (audio.currentTime / audio.duration) * 100;
-//     bar.style.width = pct + '%';
-//     bar2.style.width = pct + '%';
-//   });
-
-//   audio.addEventListener('ended', () => {
-//     // isPlaying = false;
-//     // document.getElementById('np-disc').style.animationPlayState = 'paused';
-//     // document.getElementById('np-bar').style.width = '0%';
-//     currentTrack = (currentTrack + 1) % tracks.length; // loop playlist
-//     loadTrack(currentTrack);
-
-//     audio.play();
-//     isPlaying = true;
-
-//     document.getElementById('np-disc').style.animationPlayState = 'running';
-//     document.getElementById('np-bar').style.width = '0%';
-//   });
-
-//   // START SCRUBBING
-
-//   /* ---- draggable scrub thumb ---- */
-// function pctFromEvent(e) {
-//   const rect = barTrack.getBoundingClientRect();
-//   const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-//   return Math.min(1, Math.max(0, x / rect.width));
-// }
-
-// function startScrub(e) {
-//   e.stopPropagation();
-//   e.preventDefault();
-//   isScrubbing = true;
-//   bar2.classList.add('scrubbing');
-//   thumb.classList.add('dragging');
-// //   barTrack.classList.add('scrub-active');
-// //   pill.classList.add('scrub-open');
-//   moveScrub(e);
-//   window.addEventListener('pointermove', moveScrub);
-//   window.addEventListener('pointerup', endScrub);
-// }
-
-// function moveScrub(e) {
-//   if (!isScrubbing || !audio.duration) return;
-//   const pct = pctFromEvent(e);
-//   bar2.style.width = (pct * 100) + '%';
-//   audio.currentTime = pct * audio.duration;
-// }
-
-// function endScrub() {
-//   isScrubbing = false;
-//   bar2.classList.remove('scrubbing');
-//   thumb.classList.remove('dragging');
-// //   barTrack.classList.remove('scrub-active');
-// //   pill.classList.remove('scrub-open');
-//   window.removeEventListener('pointermove', moveScrub);
-//   window.removeEventListener('pointerup', endScrub);
-// }
-
-// thumb.addEventListener('pointerdown', startScrub);
-
-// // also allow clicking anywhere on the track to jump
-// barTrack.addEventListener('pointerdown', (e) => {
-//   if (e.target === thumb) return; // already handled
-//   e.stopPropagation();
-//   if (!audio.duration) return;
-//   const pct = pctFromEvent(e);
-//   audio.currentTime = pct * audio.duration;
-//   bar.style.width = (pct * 100) + '%';
-// });
-
-
-//   // END SCRUBBING
-
-// loadTrack(currentTrack);
-
- /* END ORIGINAL MUSIC */
-
  const tracks = [
     {
       title: 'the louvre',
@@ -358,8 +160,91 @@ const body = document.querySelector('body');
   const thumb = document.getElementById('np-bar-thumb');
   const playBtn = document.getElementById('np-playpause');
   const pill = document.getElementById('now-playing');
+  const npMain = pill.querySelector('.np-main');
+  const npControls = pill.querySelector('.np-controls');
 
   const NP_STORAGE_KEY = 'npState';
+
+  /* ---- explicit pixel-width animation ---- */
+  // Measures whichever child (.np-main while collapsed,
+  // .np-controls while expanded) should be driving the
+  // pill's width right now, and sets pill.style.width to
+  // that exact px value. Because this is a real px-to-px
+  // change (not fit-content/auto), the `transition: width`
+  // on .now-playing-pill animates smoothly in every browser.
+  // Called on hover in/out AND whenever the track label
+  // text changes, so song changes resize the pill too.
+  function syncPillWidth() {
+    const expanded = pill.classList.contains('is-expanded');
+    const target = expanded ? npControls : npMain;
+    // scrollWidth gives the content's natural width regardless
+    // of the element's own current (possibly stale/animating) width
+    const next = target.scrollWidth;
+    pill.style.width = next + 'px';
+  }
+
+  function expandPill() {
+    pill.classList.add('is-expanded');
+    syncPillWidth();
+  }
+
+  function collapsePill() {
+    pill.classList.remove('is-expanded');
+    syncPillWidth();
+  }
+
+  pill.addEventListener('mouseenter', expandPill);
+  pill.addEventListener('mouseleave', collapsePill);
+  // keyboard/focus support (tabbing onto the prev/play/next buttons)
+  pill.addEventListener('focusin', expandPill);
+  pill.addEventListener('focusout', () => {
+    // relatedTarget isn't reliably populated when focus moves via a
+    // mouse click (notably in Safari), so checking it directly can
+    // wrongly conclude focus left the pill when it actually just
+    // moved from one button to another inside the same pill (e.g.
+    // clicking prev then next). Deferring one microtask and checking
+    // document.activeElement instead is accurate regardless of how
+    // focus moved.
+    queueMicrotask(() => {
+      if (!pill.contains(document.activeElement)) collapsePill();
+    });
+  });
+
+  // Click-to-toggle, layered on top of hover. This is what makes the
+  // pill usable on touch devices (no real :hover there) and gives
+  // mouse users a way to pin the controls open/closed without having
+  // to hold the cursor in place.
+  //   - Click anywhere on the collapsed info view (.np-main) -> expand.
+  //     (.np-main has no interactive descendants, so any click inside
+  //     it should expand — no exclusions needed.)
+  //   - Click on empty space inside the controls view -> collapse.
+  //     "Empty" is defined by exclusion (closest(.np-btn, #track2) is
+  //     null), not by exact e.target identity. .np-buttons is a
+  //     full-width/full-height flex row, so the visual gaps between
+  //     icons are still painted by .np-buttons itself — e.target would
+  //     resolve to .np-buttons there, never to .np-controls directly.
+  //     Requiring e.target === npControls left almost no clickable
+  //     "empty" pixels (only npControls's own ~6px padding strip),
+  //     which is why it worked once by chance and then failed.
+  npMain.addEventListener('click', expandPill);
+
+  npControls.addEventListener('click', (e) => {
+    // ignore clicks that land on a button or the scrub track — they
+    // already have their own behavior (play/pause, prev/next, seek)
+    if (e.target.closest('.np-btn, #track2')) return;
+    collapsePill();
+  });
+
+  // Set an initial width with no transition once layout is ready,
+  // so the pill doesn't pop/flash on first paint.
+  function setInitialPillWidth() {
+    pill.style.transition = 'none';
+    syncPillWidth();
+    // restore the transition on the next frame
+    requestAnimationFrame(() => {
+      pill.style.transition = '';
+    });
+  }
 
   function saveState() {
     try {
@@ -373,24 +258,21 @@ const body = document.querySelector('body');
   }
 
   function loadTrack(i, autoplay) {
-    // const t = tracks[i];
-    // audio.src = t.src;
-    // audio.volume = 0.1;
-    // document.getElementById('np-label').textContent = `${t.title} · ${t.artist}`;
-    // document.getElementById('np-cover').src = t.cover;
       const t = tracks[i];
     audio.src = t.src;
     audio.volume = 0.1;
-    // titleEl.textContent = t.title;
-    // artistEl.textContent = t.artist;
     label.innerHTML = `${t.title} · <span style="color: rgba(0, 0 , 0, 0.45);">${t.artist}</span>`;
     cover.src = t.cover;
     bar.style.width = '0%';
+    bar2.style.width = '0%';
     if (autoplay) {
       audio.play().catch(() => {});
       setPlaying(true);
     }
     saveState();
+    // label text just changed length — resync width so the
+    // pill animates to fit the new title/artist
+    syncPillWidth();
   }
 
   function setPlaying(playing) {
@@ -401,19 +283,6 @@ const body = document.querySelector('body');
     playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
     saveState();
   }
-
-
-  // function togglePlay() {
-  //   if (isPlaying) {
-  //     audio.pause();
-  //     isPlaying = false;
-  //     document.getElementById('np-disc').style.animationPlayState = 'paused';
-  //   } else {
-  //     audio.play();
-  //     isPlaying = true;
-  //     document.getElementById('np-disc').style.animationPlayState = 'running';
-  //   }
-  // }
 
   function togglePlay() {
   if (isPlaying) {
@@ -453,9 +322,6 @@ playBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); })
   });
 
   audio.addEventListener('ended', () => {
-    // isPlaying = false;
-    // document.getElementById('np-disc').style.animationPlayState = 'paused';
-    // document.getElementById('np-bar').style.width = '0%';
     currentTrack = (currentTrack + 1) % tracks.length; // loop playlist
     loadTrack(currentTrack);
 
@@ -484,8 +350,6 @@ function startScrub(e) {
   isScrubbing = true;
   bar2.classList.add('scrubbing');
   thumb.classList.add('dragging');
-//   barTrack.classList.add('scrub-active');
-//   pill.classList.add('scrub-open');
   moveScrub(e);
   window.addEventListener('pointermove', moveScrub);
   window.addEventListener('pointerup', endScrub);
@@ -502,8 +366,6 @@ function endScrub() {
   isScrubbing = false;
   bar2.classList.remove('scrubbing');
   thumb.classList.remove('dragging');
-//   barTrack.classList.remove('scrub-active');
-//   pill.classList.remove('scrub-open');
   window.removeEventListener('pointermove', moveScrub);
   window.removeEventListener('pointerup', endScrub);
   saveState();
@@ -534,6 +396,7 @@ barTrack.addEventListener('pointerdown', (e) => {
 
     if (!state) {
       loadTrack(currentTrack);
+      setInitialPillWidth();
       return;
     }
 
@@ -543,6 +406,7 @@ barTrack.addEventListener('pointerdown', (e) => {
     audio.volume = 0.1;
     label.innerHTML = `${t.title} · <span style="color: rgba(0, 0 , 0, 0.45);">${t.artist}</span>`;
     cover.src = t.cover;
+    setInitialPillWidth();
 
     audio.addEventListener('loadedmetadata', () => {
       audio.currentTime = state.currentTime || 0;
@@ -558,6 +422,14 @@ barTrack.addEventListener('pointerdown', (e) => {
 
   restoreState();
 
+  // Re-measure on viewport resize too, in case font-size/layout
+  // shifts at a breakpoint change the natural content width
+  window.addEventListener('resize', () => {
+    pill.style.transition = 'none';
+    syncPillWidth();
+    requestAnimationFrame(() => { pill.style.transition = ''; });
+  });
+
 
 function isMobile() {
   return window.innerWidth <= 768;
@@ -572,10 +444,8 @@ function checkNearBottom() {
 
   if (distanceFromBottom <= 20) {
     document.documentElement.style.setProperty('--background-img', `url(/images/background-mobile-bottom.png)`);
-    // document.body.style.backgroundImage = 'url(/images/background-mobile-bottom.png)';
   } else {
     document.documentElement.style.setProperty('--background-img', `url(/images/backgroundtest3.jpeg)`);
-    // document.body.style.backgroundImage = 'url(/images/backgroundtest3.jpeg)';
   }
 }
 

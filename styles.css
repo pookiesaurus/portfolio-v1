@@ -1,4 +1,4 @@
- *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0;
 /* border: red 1px solid; */
 }
 
@@ -567,34 +567,63 @@ transition: color 0.15s;
 .project-row { transition: background 0.15s, opacity 0.2s, max-height 0.25s; }
 .project-row.hidden { display: none; }
 
-.np-main, .np-controls {
-display: flex;
-align-items: center;
-gap: 12px;
-padding: 6px 20px 6px 6px;
-width: fit-content;
-cursor: default;
-height: 41px;
-transition:all 300ms ease;
+/* ───────────────────────────────────────────
+   NOW PLAYING PILL
+   Width is set explicitly in JS (see syncPillWidth
+   in the script), measured from whichever child
+   (.np-main or .np-controls) is the active one,
+   plus re-measured whenever the track label
+   changes. This sidesteps fit-content/auto-width
+   transition limitations entirely — animating a
+   real px-to-px value works in every browser.
+   .np-controls stays position: absolute (out of
+   flow) so it never affects layout/scroll; .js
+   reads its scrollWidth directly for measuring.
+   Expand/collapse state is driven by the
+   .is-expanded class (toggled on hover AND on
+   focus-within, via JS) rather than a bare :hover
+   selector, so the same code path can be reused
+   for track-change resyncs.
+─────────────────────────────────────────── */
 
+.now-playing-pill {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  transition: width var(--resize-dur) var(--resize-ease);
+}
+
+.np-main, .np-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 20px 6px 6px;
+  width: max-content;
+  height: 41px;
+  cursor: default;
+  transition: opacity 0.15s ease;
 }
 
 .np-controls {
   padding: 6px;
-}
-
-.np-controls {
-  display: flex;
   flex-direction: column;
-  width: 100%;
   gap: 0;
+  justify-content: center;
   position: absolute;
   top: 0;
   left: 0;
-
-      opacity:0;
-    pointer-events:none;
-    justify-content:center;
+  /* Fixed width, not max-content. .np-buttons and #track2 below
+     are percentage-sized against THIS box, so if this box were
+     itself max-content (sized from ITS children) we'd have a
+     circular dependency: width depends on children, children's
+     width depends on this width. Browsers resolve that
+     inconsistently across repeated layout passes — which is why
+     repeated calls to syncPillWidth() could read a different
+     scrollWidth each time. A fixed px value breaks the cycle and
+     makes scrollWidth deterministic on every measurement. */
+  width: 180px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .np-controls button{
@@ -604,19 +633,12 @@ transition:all 300ms ease;
     cursor:pointer;
 }
 
-.now-playing-pill {
-  padding: 0;
-  width: fit-content;
-    transition: width 300ms ease;
-
-}
-
-.now-playing-pill:hover .np-main{
+.now-playing-pill.is-expanded .np-main{
     opacity:0;
-    /* transform:translateY(-4px); */
+    pointer-events: none;
 }
 
-.now-playing-pill:hover .np-controls{
+.now-playing-pill.is-expanded .np-controls{
     opacity:1;
     pointer-events:auto;
 }
@@ -727,7 +749,6 @@ animation-play-state: running;
 display: flex;
 flex-direction: column;
 gap: 1px;
-flex: 1;
 min-width: 0;
 }
 .np-title {
@@ -772,6 +793,7 @@ color: rgba(0,0,0,0.60);
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
+max-width: 220px;
 }
 
 .home-fab {
