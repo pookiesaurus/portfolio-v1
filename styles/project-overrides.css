@@ -1,0 +1,48 @@
+/* ===================================================================
+   Project Window Overrides — Level 2 (windowClass)
+
+   Link this AFTER project-window.css. Each rule here targets one
+   specific project's window via the class set in its data entry's
+   `windowClass` field. Theme variables (Level 1) can't reach things
+   like background images, gradients, or structural changes — that's
+   what this file is for.
+
+   Add one block per project that needs this level of override.
+   =================================================================== */
+
+/* ---- "roam" project: routing-schematic look ---- */
+.pw-window-blueprint{
+  background:
+    linear-gradient(rgba(20,40,70,0.94), rgba(20,40,70,0.94)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 24px);
+}
+
+.pw-window-blueprint .pw-titlebar{
+  background: rgba(12,24,42,0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.pw-window-blueprint .pw-titlebar-label{
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.75);
+}
+
+.pw-window-blueprint .pw-body{
+  background: transparent;
+}
+
+.pw-window-blueprint .pw-h1,
+.pw-window-blueprint .pw-block-text,
+.pw-window-blueprint .pw-eyebrow,
+.pw-window-blueprint .pw-block-label,
+.pw-window-blueprint .pw-meta{
+  color: rgba(255,255,255,0.9);
+}
+
+.pw-window-blueprint .pw-meta,
+.pw-window-blueprint .pw-eyebrow,
+.pw-window-blueprint .pw-block-label{
+  color: rgba(160,200,255,0.75);
+}

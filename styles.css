@@ -73,6 +73,9 @@ background-attachment: fixed;
 background-color: #4D87C5;
 height: 100%;
 position: relative;
+
+display: flex;
+  flex-direction: column;
    }
 
   
@@ -546,6 +549,8 @@ align-items: flex-end;
 /* aspect-ratio: 3.95 / 1; */
 aspect-ratio: 1440 / 241;
 width: 100%;
+  margin-top: auto;
+
 }
 
 footer .footer-name {
@@ -1196,7 +1201,7 @@ box-shadow: var(--glass-box-shadow);
   
   .intro-text p {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 24px;
     color: rgba(0, 0, 0, 0.66);
     text-align: justify;
@@ -1304,7 +1309,10 @@ box-shadow: var(--glass-box-shadow);
   .media-item { display: flex; flex-direction: row; gap: 10px; width: 100%; max-width: 100%; padding: 10px; background: var(--glass-background); border-radius: 8px;
   border-top-color: var(--glass-border-top);
 border-bottom-color: var(--glass-border-bottom);
-box-shadow: var(--glass-box-shadow);}
+box-shadow: var(--glass-box-shadow);
+align-items: center;
+
+}
   .media-thumb {
     width: 50px;
     aspect-ratio: 1;
@@ -1315,7 +1323,8 @@ box-shadow: var(--glass-box-shadow);}
 
   .book {aspect-ratio: 39 / 64;}
 
-  .album {aspect-ratio: 1;}
+  .album {aspect-ratio: 1;
+  height: 50px;}
 
   .poster {aspect-ratio: 1 / 1.5;}
 
@@ -1559,4 +1568,130 @@ to   { opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
   .t-resize { transition: none !important; }
+}
+
+/* ───────────────────────────────────────────
+   CONTACT PAGE
+   Reuses --glass-background / --glass-border-*
+   / --glass-box-shadow tokens from styles.css.
+   Card layout mirrors .project-row / .exp-row:
+   glass panel, rounded 8-10px, hover lighten.
+─────────────────────────────────────────── */
+
+.contact-section {
+  padding: 32px var(--left-right-padding) 64px;
+}
+
+.contact-grid {
+  display: grid;
+  width: 100%;
+  /* grid-template-columns: repeat(2, 1fr); 
+  */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 16px;
+  /* max-width: 760px; */
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  background: var(--glass-background);
+  border: var(--glass-border);
+  border-top-color: var(--glass-border-top);
+  border-bottom-color: var(--glass-border-bottom);
+  box-shadow: var(--glass-box-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.15s, transform 0.15s;
+}
+
+.contact-card:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.contact-card:active {
+  transform: scale(0.98);
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.35);
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.contact-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contact-text h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #38414B;
+}
+
+.contact-text p {
+  font-size: 14px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: rgba(0, 0, 0, 0.35);
+  transition: color 0.15s, transform 0.15s;
+}
+
+.contact-card:hover .contact-arrow {
+  color: rgba(0, 0, 0, 0.6);
+  transform: translate(2px, -2px);
+}
+
+.contact-arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* RESPONSIVE — match breakpoints already used across the site */
+@media (max-width: 1100px) {
+  .contact-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 16px;
+  /* max-width: 760px; */
+}
+}
+
+
+@media (max-width: 700px) {
+  .contact-section { padding: 24px 14px 36px; }
+}
+
+@media (max-width: 560px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
 }

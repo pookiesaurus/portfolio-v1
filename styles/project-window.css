@@ -1,0 +1,626 @@
+/* ===================================================================
+   Project Window — draggable, resizable "app window" for project popups
+   Drop this file in alongside your existing site CSS and link it on
+   any page that needs project windows (e.g. projects.html).
+   =================================================================== */
+
+:root{
+  --pw-radius: 10px;
+  --pw-border: rgba(255,255,255,0.35);
+  --pw-bg: rgba(255,255,255,0.42);
+  --pw-bg-solid: rgba(255, 255, 255, 0.8);
+  --pw-shadow: 0 24px 60px -12px rgba(20,20,30,0.35), 0 2px 8px rgba(20,20,30,0.08);
+  --pw-titlebar-h: 30px;
+  --pw-text: rgba(0, 0, 0, 0.66);
+  --pw-text-dim: #6b6b70;
+  --pw-accent: #3b3b3e;
+  --pw-titlebar-bg: rgba(255,255,255,0.4);
+  --pw-font-family: 'Geist', sans-serif;
+}
+
+/* Backdrop click-catcher. Doesn't dim the page — windows float over it
+   like real OS windows. Pointer-events none so the page stays usable
+   while a window is open; the window itself re-enables pointer-events. */
+.pw-layer{
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  pointer-events: none;
+}
+
+.pw-window{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 220px;
+  width: 720px;
+  height: 560px;
+  /* background: var(--pw-bg); */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--pw-border);
+  border-radius: var(--pw-radius);
+  box-shadow: var(--pw-shadow);
+  overflow: hidden;
+  pointer-events: auto;
+  opacity: 0;
+  transform: scale(0.96) translateY(8px);
+  transition: opacity 180ms ease, transform 180ms ease;
+  font-family: var(--pw-font-family);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.192);
+    border-bottom-color: rgba(255, 255, 255, 0.034);
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.18) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.05) inset, 0 0 0 0.5px rgba(0, 0, 0, 0.082), 0 24px 60px rgba(0, 0, 0, 0.11), 0 6px 16px rgba(0, 0, 0, 0.048);
+
+    box-sizing: border-box;
+}
+
+.pw-window.pw-open{
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.pw-window.pw-closing{
+  opacity: 0;
+  transform: scale(0.97) translateY(6px);
+}
+
+.pw-window.pw-active{
+  box-shadow: 0 30px 70px -10px rgba(20,20,30,0.42), 0 2px 8px rgba(20,20,30,0.1);
+}
+
+.pw-window.pw-dragging,
+.pw-window.pw-resizing{
+  transition: none;
+  user-select: none;
+}
+
+.pw-window.pw-maximized{
+  border-radius: 10px;
+}
+
+/* ---------- Titlebar ---------- */
+.pw-titlebar{
+  flex: 0 0 var(--pw-titlebar-h);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: var(--pw-titlebar-bg);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  cursor: grab;
+  touch-action: none;
+}
+
+.pw-window.pw-dragging .pw-titlebar{
+  cursor: grabbing;
+}
+
+.pw-traffic{
+  display: flex;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.pw-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transition: filter 120ms ease;
+}
+
+.pw-dot:hover{ filter: brightness(0.9); }
+
+.pw-dot-close{ background: #ff5f57; }
+.pw-dot-min{ background: #febc2e; }
+.pw-dot-max{ background: #28c840; }
+
+.pw-dot svg{
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 7px;
+  height: 7px;
+  opacity: 0;
+}
+.pw-traffic:hover .pw-dot svg{ opacity: 0.55; }
+
+.pw-titlebar-label{
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: var(--pw-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+/* spacer to balance traffic lights so title centers visually */
+.pw-titlebar-spacer{ flex: 0 0 auto; width: 54px; }
+
+/* ---------- Body ---------- */
+.pw-body{
+  flex: 1 1 auto;
+  overflow-y: auto;
+  background: var(--pw-bg-solid);
+  padding: 28px 32px 36px;
+}
+
+.pw-body::-webkit-scrollbar{ width: 9px; }
+.pw-body::-webkit-scrollbar-thumb{
+  background: rgba(0,0,0,0.14);
+  border-radius: 6px;
+}
+.pw-body::-webkit-scrollbar-track{ background: transparent; }
+
+/* Project content blocks rendered inside the window body */
+.pw-eyebrow{
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pw-text-dim);
+  margin: 0 0 6px;
+  font-family: "Geist Mono", monospace;
+  font-weight: 500;
+}
+
+.pw-h1{
+  font-size: 28px;
+  line-height: 1.15;
+  margin: 0 0 10px;
+  color: var(--pw-text);
+  font-weight: 600;
+}
+
+/* ---------- Link row (View Live / GitHub / Figma, etc.) ---------- */
+.pw-link-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.pw-link-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--pw-text);
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 999px;
+  padding: 6px 13px;
+  text-decoration: none;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.pw-link-btn:hover{
+  background: rgba(0,0,0,0.09);
+  border-color: rgba(0,0,0,0.14);
+}
+
+.pw-link-btn svg{
+  flex: 0 0 auto;
+  opacity: 0.8;
+}
+
+.pw-meta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 13px;
+  color: var(--pw-text-dim);
+  margin-bottom: 22px;
+}
+
+.pw-meta span::before{
+  content: "✦";
+  margin-right: 8px;
+  font-size: 10px;
+  opacity: 0.6;
+}
+.pw-meta span:first-child::before{ content: none; margin-right: 0; }
+
+/* ---------- Info stats row (timeline / role / team / disciplines) ---------- */
+.pw-info-stats{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+  padding: 16px 0 20px;
+  margin-bottom: 22px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.pw-stat{
+  min-width: 100px;
+  flex: 0 1 auto;
+}
+
+.pw-stat-label{
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pw-text-dim);
+  margin: 0 0 6px;
+  font-family: "Geist Mono", monospace;
+  font-weight: 500;
+}
+
+.pw-stat-value{
+  font-size: 14px;
+  color: var(--pw-text);
+  line-height: 1.4;
+}
+
+/* Team variant: stacked name + role pairs */
+.pw-stat-team .pw-stat-value{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pw-stat-team-member{
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pw-stat-team-role{
+  font-size: 11.5px;
+  color: var(--pw-text-dim);
+}
+
+.pw-stat-team-role::before{
+  content: "-   ";
+}
+
+/* Disciplines variant: small chips instead of plain text */
+.pw-stat-chips .pw-stat-value{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pw-stat-chip{
+  font-size: 11.5px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 999px;
+  padding: 3px 10px;
+  color: var(--pw-text);
+}
+
+@media (max-width: 720px){
+  .pw-info-stats{
+    gap: 14px 22px;
+  }
+}
+
+.pw-gallery{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 1fr);
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 24px;
+}
+
+.pw-gallery img{
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #eee;
+  display: block;
+}
+
+.pw-block{ margin-bottom: 20px; }
+
+.pw-block-label{
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pw-text-dim);
+  margin: 0 0 8px;
+  font-family: "Geist ", monospace;
+    font-weight: 500;
+
+}
+
+.pw-block-text{
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--pw-text);
+}
+
+.pw-block-paragraph{
+  margin: 0 0 14px;
+  white-space: pre-wrap;
+}
+
+.pw-block-paragraph:last-child{
+  margin-bottom: 0;
+}
+
+.pw-subheading{
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--pw-text);
+  margin: 22px 0 10px;
+}
+
+.pw-subheading:first-child{
+  margin-top: 0;
+}
+
+.pw-inline-link{
+  color: var(--pw-accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(0,0,0,0.25);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 120ms ease;
+}
+
+.pw-inline-link:hover{
+  text-decoration-color: currentColor;
+}
+
+
+.pw-block-images{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.pw-block-images figure{
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.pw-block-images img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.pw-block-images figcaption{
+  font-size: 12.5px;
+  color: var(--pw-text-dim);
+  padding: 8px 12px 10px;
+}
+
+/* ---------- Video block ---------- */
+/* Breaks out of .pw-body's side padding so the video spans the full
+   width of the window, edge to edge, regardless of how much text
+   padding surrounds it. */
+.pw-block-video{
+  margin-left: -32px;
+  margin-right: -32px;
+}
+
+.pw-block-video .pw-block-label{
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.pw-video-frame{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.pw-video-frame iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.pw-video-native{
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+}
+
+.pw-video-caption{
+  font-size: 12.5px;
+  color: var(--pw-text-dim);
+  padding: 10px 32px 0;
+}
+
+@media (max-width: 720px){
+  .pw-block-video{
+    margin-left: -18px;
+    margin-right: -18px;
+  }
+  .pw-block-video .pw-block-label,
+  .pw-video-caption{
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+/* ---------- Resize handles ---------- */
+.pw-resize{
+  position: absolute;
+  z-index: 2;
+}
+.pw-resize-e{ top: 8px; right: -4px; bottom: 8px; width: 9px; cursor: ew-resize; }
+.pw-resize-w{ top: 8px; left: -4px; bottom: 8px; width: 9px; cursor: ew-resize; }
+.pw-resize-s{ left: 8px; right: 8px; bottom: -4px; height: 9px; cursor: ns-resize; }
+.pw-resize-n{ left: 8px; right: 8px; top: -4px; height: 9px; cursor: ns-resize; }
+.pw-resize-se{ right: -5px; bottom: -5px; width: 16px; height: 16px; cursor: nwse-resize; }
+.pw-resize-sw{ left: -5px; bottom: -5px; width: 16px; height: 16px; cursor: nesw-resize; }
+.pw-resize-ne{ right: -5px; top: -5px; width: 16px; height: 16px; cursor: nesw-resize; }
+.pw-resize-nw{ left: -5px; top: -5px; width: 16px; height: 16px; cursor: nwse-resize; }
+
+.pw-window.pw-maximized .pw-resize{ display: none; }
+
+/* ---------- Taskbar (minimized windows) ---------- */
+.pw-taskbar{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 950;
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  pointer-events: none;
+}
+
+.pw-taskbar-item{
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 999px;
+  padding: 11px 19px;
+  font-size: 14px;
+  color: var(--pw-text);
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  animation: pw-taskbar-in 160ms ease;
+
+  font-weight: 500;
+
+  background: linear-gradient(180deg, rgba(180, 180, 180, 0.219), rgba(214, 214, 214, 0.336));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.192);
+  border-bottom-color: rgba(255, 255, 255, 0.034);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.18) inset, 0 -1px 0 0 rgba(255, 255, 255, 0.05) inset, 0 0 0 0.5px rgba(0, 0, 0, 0.082), 0 24px 60px rgba(0, 0, 0, 0.11), 0 6px 16px rgba(0, 0, 0, 0.048);
+
+  box-sizing: border-box;
+}
+
+.pw-taskbar-item:hover{ background: rgba(255,255,255,0.32); }
+
+.pw-taskbar-item .pw-dot-min{ width: 8px; height: 8px; }
+
+@keyframes pw-taskbar-in{
+  from{ opacity: 0; transform: translateY(8px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .pw-window, .pw-taskbar-item{ transition: none; animation: none; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 720px){
+  .pw-window{
+    width: calc(100vw - 24px) !important;
+    height: calc(100vh - 24px) !important;
+    left: 12px !important;
+    top: 12px !important;
+  }
+  .pw-resize{ display: none; }
+  .pw-body{ padding: 22px 18px 28px; }
+}
+
+/* Visible keyboard focus */
+.pw-dot:focus-visible,
+.pw-taskbar-item:focus-visible,
+.pw-trigger:focus-visible{
+  outline: 2px solid var(--pw-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Lightbox (click a photo to expand it) ---------- */
+.pw-lightbox-trigger{
+  cursor: zoom-in;
+}
+
+.pw-lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(10,10,12,0);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, background 200ms ease, visibility 200ms;
+}
+
+.pw-lightbox.pw-lightbox-open{
+  background: rgba(10,10,12,0.86);
+  opacity: 1;
+  visibility: visible;
+}
+
+.pw-lightbox-img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  transform: scale(0.96);
+  transition: transform 200ms ease;
+  cursor: zoom-out;
+}
+
+.pw-lightbox.pw-lightbox-open .pw-lightbox-img{
+  transform: scale(1);
+}
+
+.pw-lightbox-close{
+  position: fixed;
+  top: 22px;
+  right: 26px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.pw-lightbox-close:hover{
+  background: rgba(255,255,255,0.22);
+}
+
+/* Locks page scroll behind the lightbox while it's open */
+body.pw-lightbox-locked{
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pw-lightbox, .pw-lightbox-img{ transition: none; }
+}
+
+@media (max-width: 720px){
+  .pw-lightbox{ padding: 16px; }
+  .pw-lightbox-close{ top: 14px; right: 14px; }
+}
