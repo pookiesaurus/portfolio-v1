@@ -1413,6 +1413,9 @@ box-shadow: var(--glass-box-shadow);
     background: rgba(255,255,255,0.1);
   }
 
+  .yspsfagsil {
+    font-size: 10px;
+  }
 
 /* transitions.dev */
 .t-resize {
@@ -1490,6 +1493,7 @@ footer { flex-direction: column; align-items: flex-start; gap: 20px; padding: 32
 .home-fab { display: block; }
 }
 
+
 @media (max-width: 500px) {
   .media-row {
   display: grid;
@@ -1497,6 +1501,10 @@ footer { flex-direction: column; align-items: flex-start; gap: 20px; padding: 32
   /* overflow: hidden; */
   }
   .media-item {gap: 15px;}
+  .yspsfagsil {
+    font-size: 12px;
+  }
+
 }
 
 @media (max-width: 480px) {
