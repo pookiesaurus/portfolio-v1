@@ -518,6 +518,37 @@
     win.style.zIndex = String(zCounter);
   }
 
+  // Keeps a window's titlebar reachable after the browser viewport
+  // shrinks (e.g. resizing the browser window) — called on window
+  // resize for every currently-open window.
+  function clampWindowToViewport(win) {
+    if (win.dataset.maximized === "1") return;
+    const minVisible = 80;
+    const titlebar = win.querySelector(".pw-titlebar");
+    const titlebarHeight = (titlebar && titlebar.getBoundingClientRect().height) || 30;
+    const w = win.offsetWidth;
+    const left = win.offsetLeft;
+    const top = win.offsetTop;
+
+    const maxLeft = window.innerWidth - minVisible;
+    const minLeft = minVisible - w;
+    const maxTop = window.innerHeight - titlebarHeight;
+
+    const newLeft = Math.min(Math.max(left, minLeft), maxLeft);
+    const newTop = Math.min(Math.max(top, 0), maxTop);
+
+    if (newLeft !== left) win.style.left = `${newLeft}px`;
+    if (newTop !== top) win.style.top = `${newTop}px`;
+  }
+
+  let viewportResizeTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(viewportResizeTimer);
+    viewportResizeTimer = setTimeout(() => {
+      openWindows.forEach((win) => clampWindowToViewport(win));
+    }, 120);
+  });
+
   function placeWindow(win) {
     if (isMobile()) {
       win.style.left = "12px";
@@ -527,8 +558,11 @@
     const cascade = (openCount % 6) * CASCADE_OFFSET;
     const w = win.offsetWidth || 720;
     const h = win.offsetHeight || 560;
-    const x = Math.max(24, (window.innerWidth - w) / 2 + cascade - 60);
-    const y = Math.max(24, (window.innerHeight - h) / 2 + cascade - 80);
+    let x = Math.max(24, (window.innerWidth - w) / 2 + cascade - 60);
+    let y = Math.max(24, (window.innerHeight - h) / 2 + cascade - 80);
+    // Don't let cascading place a window mostly off the right/bottom edge.
+    x = Math.min(x, Math.max(24, window.innerWidth - w - 24));
+    y = Math.min(y, Math.max(24, window.innerHeight - h - 24));
     win.style.left = `${x}px`;
     win.style.top = `${y}px`;
   }
@@ -631,8 +665,19 @@
       const dy = point.clientY - startY;
       let newLeft = startLeft + dx;
       let newTop = startTop + dy;
-      // keep titlebar reachable on screen
-      newTop = Math.max(0, newTop);
+
+      // Keep enough of the titlebar on-screen at all times so the
+      // window can always be grabbed and dragged back, regardless of
+      // how it was moved or resized beforehand.
+      const titlebarHeight = titlebar.getBoundingClientRect().height || 30;
+      const minVisible = 80; // px of titlebar width that must stay reachable
+      const maxLeft = window.innerWidth - minVisible;
+      const minLeft = minVisible - win.offsetWidth;
+      const maxTop = window.innerHeight - titlebarHeight;
+
+      newLeft = Math.min(Math.max(newLeft, minLeft), maxLeft);
+      newTop = Math.min(Math.max(newTop, 0), maxTop);
+
       win.style.left = `${newLeft}px`;
       win.style.top = `${newTop}px`;
       if (e.cancelable) e.preventDefault();
@@ -700,15 +745,33 @@
         let newLeft = startLeft;
         let newTop = startTop;
 
-        if (dirs.includes("e")) newW = Math.max(minWidth, startW + dx);
-        if (dirs.includes("s")) newH = Math.max(minHeight, startH + dy);
+        // Cap how far the window can grow so an edge never ends up
+        // past the viewport with no way to reach it again.
+        const maxW = window.innerWidth - startLeft;
+        const maxH = window.innerHeight - startTop;
+
+        if (dirs.includes("e")) {
+          newW = Math.min(Math.max(minWidth, startW + dx), maxW);
+        }
+        if (dirs.includes("s")) {
+          newH = Math.min(Math.max(minHeight, startH + dy), maxH);
+        }
         if (dirs.includes("w")) {
+          // Growing leftward must stop at the left edge of the screen —
+          // otherwise newLeft goes negative and the titlebar's origin
+          // corner ends up off-screen with nothing left to grab.
+          const maxGrowLeft = startLeft; // can't grow further left than x=0
           newW = Math.max(minWidth, startW - dx);
+          newW = Math.min(newW, startW + maxGrowLeft);
           newLeft = startLeft + (startW - newW);
+          newLeft = Math.max(0, newLeft);
         }
         if (dirs.includes("n")) {
+          const maxGrowUp = startTop; // can't grow further up than y=0
           newH = Math.max(minHeight, startH - dy);
+          newH = Math.min(newH, startH + maxGrowUp);
           newTop = startTop + (startH - newH);
+          newTop = Math.max(0, newTop);
         }
 
         win.style.width = `${newW}px`;
