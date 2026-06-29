@@ -324,5 +324,47 @@ window.PROJECTS = [
         content: "This project involved the end-to-end redesign and development of the Sweet Mayada Cakes website, with the goal of creating a modern, responsive digital experience that better reflected the brand while improving usability and engagement. Rather than focusing solely on the final product, the project explored the complete UX and UI design process, from early research through to implementation and critical evaluation.\n\nThe design process began with developing mood boards and gathering visual inspiration to establish the brand's identity and tone. Multiple art directions were explored before selecting the strongest visual language, informed by critical comparison and reflection. This foundation guided the creation of sketches, low-fidelity wireframes, and high-fidelity prototypes, alongside careful consideration of typography, colour palettes, spacing, layout systems, and interaction design to produce a cohesive and accessible interface.\n\nThe final website was developed using HTML, CSS, and JavaScript, translating the design system into a responsive, production-ready website with interactive components and a consistent experience across desktop and mobile devices. Throughout the project, design decisions were continuously evaluated through critical analysis, ensuring that aesthetic choices also supported usability, accessibility, and the business's goals.\n\nThis project marked a significant milestone in my development as a designer. It expanded my perspective beyond simply creating attractive interfaces, teaching me to consider every aspect of product and interface design - from brand identity and visual systems to user needs, accessibility, information hierarchy, and implementation. More importantly, it reinforced the value of iteration, critical reflection, and evidence-based decision-making, giving me a much deeper understanding of how thoughtful design choices contribute to meaningful user experiences."
       }
     ]
+  },
+    {
+    id: "ai-portfolio-builder-prototype",
+    title: "AI Portfolio Builder Prototype",
+    eyebrow: "Product Design",
+    date: "November 2024",
+    links: [
+      { label: "View live prototype", url: "https://www.figma.com/proto/QNDITRtsATW1iuQ1NETLIM/Prototype---Working-Draft?page-id=0%3A1&node-id=110-580&viewport=3067%2C682%2C0.4&t=hdwk2bk7kJv6bODh-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=110%3A580&show-proto-sidebar=1" },
+      { label: "Read user research report", url: "https://docs.google.com/document/d/1b3TCk8ejWje5vmFLATLy0OfOrn3f4Uko/edit?usp=sharing&ouid=114976375432775018213&rtpof=true&sd=true" },
+      { label: "Read project report", url: "https://docs.google.com/document/d/1l9PbZkHCwyhsjkj5GqZBS1okiPDnu3lr/edit?usp=sharing&ouid=114976375432775018213&rtpof=true&sd=true" },
+      { label: "View project video", url: "https://youtu.be/CewrQMYpqLo" }
+    ],
+    tags: ["Group Project", "Prototyping"],
+    info: {
+      timeline: "Aug - Nov 2024",
+      role: "Product Designer",
+      team: [
+        "Ryan Pham (me!)",
+        "Phoebe Biggin",
+        "Jasleen Sandhu",
+        "Matthew O'Connell",
+        "Lisa-Marie Muvirimi"
+      ],
+      disciplines: ["UI/UX Design", "User Research", "Interviewing", "Thematic Analysis", "Personas", "Figma Prototyping", "Paper Prototyping"]
+    },
+    gallery: [
+      "/images/airesume/img1.png",
+      "/images/airesume/img2.png",
+      "/images/airesume/img3.png",
+      "/images/airesume/img4.png"
+    ],
+    blocks: [
+      {
+        type: "video",
+        src: "https://youtu.be/CewrQMYpqLo"
+      },
+      {
+        type: "text",
+        label: "ABSTRACT",
+        content: "A prototype for an AI resume/portfolio builder. An initial report featuring the results of interviews, thematic analysis and personas is included as part of the design process. The final prototype is accompanied with a report and a video presentation detailing the design process, user testing results, and future improvements. \n\nOutside of general group work, I was responsible for prototyping the home page and the user onboarding process, as well as general revisions for cohesion."
+      }
+    ]
   }
 ];
