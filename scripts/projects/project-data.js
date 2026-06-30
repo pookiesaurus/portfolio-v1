@@ -160,7 +160,7 @@ window.PROJECTS = [
   },
 
   {
-    id: "starchitect",
+    id: "starchitect1",
     title: "Starchitect",
     eyebrow: "Cybernetic Futures 2026",
     date: "May 2026",
@@ -364,6 +364,73 @@ window.PROJECTS = [
         type: "text",
         label: "ABSTRACT",
         content: "A prototype for an AI resume/portfolio builder. An initial report featuring the results of interviews, thematic analysis and personas is included as part of the design process. The final prototype is accompanied with a report and a video presentation detailing the design process, user testing results, and future improvements. \n\nOutside of general group work, I was responsible for prototyping the home page and the user onboarding process, as well as general revisions for cohesion."
+      }
+    ]
+  },
+    {
+    id: "pok-mon-data-analysis",
+    title: "Pokémon Data Analysis",
+    eyebrow: "Data Analysis",
+    date: "May 2025",
+    links: [
+      { label: "Read report", url: "https://pookiesaurus.github.io/pokemon_data_analysis/" }
+    ],
+    tags: ["Data Analysis", "Uni Project"],
+    info: {
+      timeline: "Apr - May 2025",
+      role: "Data Analyst",
+      team: [
+        "Ryan Pham (me!)"
+      ],
+      disciplines: ["Data Analysis", "Python", "pandas"]
+    },
+    gallery: [],
+    blocks: [
+      {
+        type: "text",
+        label: "ABSTRACT",
+        content: "This project explores gender distribution patterns across Pokémon generations and examines how base stats vary between male and female Pokémon. Using Python and pandas, raw Pokémon data was cleaned, aggregated, and visualised to surface trends that aren't obvious from the games themselves - including which generations skew toward particular gender ratios and whether genderless or single-gender species cluster around specific stat profiles. The analysis combines exploratory data wrangling with clear, readable visualisations to turn a sprawling dataset into a digestible narrative."
+      }
+    ]
+  },
+    {
+    id: "starchitect",
+    title: "Starchitect",
+    eyebrow: "Game Design",
+    date: "May 2026",
+    links: [
+      { label: "Read the rulebook", url: "https://ryanapham.com/assets/starchitect-rulebook-v1.1.pdf" },
+      { label: "Watch the showcase video", url: "https://youtu.be/magCbUVoc3Q" },
+      { label: "Read the design report", url: "https://docs.google.com/document/d/1kQOpRLisW1II6PI2-LoASg93t3j0d1IRYdXOolWz2yw/edit?usp=sharing" }
+    ],
+    tags: ["Group Project", "Game Design"],
+    info: {
+      timeline: "Apr - May 2026",
+      role: "Game Designer",
+      team: [
+        "Ryan Pham (me!)",
+        "Phoebe Biggin",
+        "Matthew O'Connell"
+      ],
+      disciplines: ["Game Design", "Board Games", "UX Design"]
+    },
+    gallery: [
+      "/images/about-me-pics/pic1.png",
+      "/images/starchitect/sell-sheet.png",
+      "/images/starchitect/showcase-table.jpeg",
+      "/images/starchitect/planet-card.png",
+      "/images/starchitect/constellation-card.png",
+      "/images/starchitect/environment-card.png"
+    ],
+    blocks: [
+      {
+        type: "video",
+        src: "https://youtu.be/magCbUVoc3Q"
+      },
+      {
+        type: "text",
+        label: "ABSTRACT",
+        content: "Starchitect is a mid-complexity board game built around constellation-building, set in a science-fiction premise where players compete as space-faring \"Starchitects\" racing to claim the stars. Designed across three interlocking mechanics: star placement, secret-hand planet cards, and dynamic environment effects, the game layers immediate, discernible actions with longer-term board-wide conditions to create meaningful, evolving decisions each turn. Aside from the general group decision-making, I contributed to board layout and the planisphere-inspired design, wrote and designed the rulebook and reference card, wrote some of the flavour text on the constellations cards, and helped plan and run the playtesting sessions and final demo. The project was shaped through two rounds of playtesting and iteration, addressing issues of visual clarity, pacing, and card balance, and went on to receive an Honourable Mention at Cybernetic Futures 2026."
       }
     ]
   }
