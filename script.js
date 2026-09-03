@@ -138,6 +138,12 @@ const body = document.querySelector('body');
       artist: 'reneé rapp',
       src: '/audio/track5.mp3',
       cover: '/images/cover5.png'
+    },
+    {
+      title: 'hand in my pocket',
+      artist: 'alanis morissette',
+      src: '/audio/track6.mp3',
+      cover: '/images/cover6.jpg'
     }
   ];
 
