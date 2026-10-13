@@ -491,6 +491,11 @@ function isMobile() {
 
 const BG_DEFAULT = 'url(/images/backgroundtest3.webp)';
 const BG_MOBILE_BOTTOM = 'url(/images/background-mobile-bottom.webp)';
+// Desktop: at the very bottom, paint a green band under the footer hills.
+// body:before stays fixed while macOS rubber-band overscroll lifts the page,
+// so this band is what shows below the footer. 6vw stays hidden behind the
+// opaque part of footer2.webp until then.
+const BG_DESKTOP_BOTTOM = 'linear-gradient(to top, #82BC68 6vw, transparent 6vw), url(/images/backgroundtest3.webp)';
 let currentBg = BG_DEFAULT;
 let bgTicking = false;
 
@@ -498,11 +503,13 @@ function checkNearBottom() {
   bgTicking = false;
   let next = BG_DEFAULT;
 
-  if (isMobile()) { // only swap the background on mobile widths
-    const scrollPosition = window.scrollY + window.innerHeight;
-    const pageHeight = document.documentElement.scrollHeight;
-    const distanceFromBottom = pageHeight - scrollPosition;
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const pageHeight = document.documentElement.scrollHeight;
+  const distanceFromBottom = pageHeight - scrollPosition;
+  if (isMobile()) {
     if (distanceFromBottom <= 20) next = BG_MOBILE_BOTTOM;
+  } else if (distanceFromBottom <= 1) {
+    next = BG_DESKTOP_BOTTOM;
   }
 
   // Only touch the root custom property when the image actually
