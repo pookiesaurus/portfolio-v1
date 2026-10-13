@@ -192,18 +192,62 @@ const body = document.querySelector('body');
     pill.style.width = next + 'px';
   }
 
+  // When the song info is wider than the controls, expanding SHRINKS
+  // the pill. With the cursor near the edge, the pill shrinks out from
+  // under it -> mouseleave -> collapse (grows back under the cursor) ->
+  // mouseenter -> shrink... an endless jitter. To break the loop we
+  // remember the rect the pill had while collapsed, and on mouseleave
+  // only collapse once the cursor is outside that area too.
+  let collapsedRect = null;
+  let watchingZone = false;
+
+  function inHoverZone(x, y) {
+    const r = pill.getBoundingClientRect();
+    const z = collapsedRect || r;
+    return x >= Math.min(r.left, z.left) && x <= Math.max(r.right, z.right) &&
+           y >= Math.min(r.top, z.top) && y <= Math.max(r.bottom, z.bottom);
+  }
+
+  function onZoneMove(e) {
+    if (!inHoverZone(e.clientX, e.clientY)) collapsePill();
+  }
+
+  function stopZoneWatch() {
+    if (!watchingZone) return;
+    watchingZone = false;
+    document.removeEventListener('pointermove', onZoneMove);
+    document.documentElement.removeEventListener('mouseleave', collapsePill);
+  }
+
   function expandPill() {
+    stopZoneWatch();
+    if (!pill.classList.contains('is-expanded')) {
+      collapsedRect = pill.getBoundingClientRect();
+    }
     pill.classList.add('is-expanded');
     syncPillWidth();
   }
 
   function collapsePill() {
+    stopZoneWatch();
     pill.classList.remove('is-expanded');
     syncPillWidth();
   }
 
+  function onPillLeave(e) {
+    if (pill.classList.contains('is-expanded') && inHoverZone(e.clientX, e.clientY)) {
+      // Left only because the pill shrank — wait for the cursor to
+      // actually leave the original area (or the window).
+      watchingZone = true;
+      document.addEventListener('pointermove', onZoneMove);
+      document.documentElement.addEventListener('mouseleave', collapsePill);
+      return;
+    }
+    collapsePill();
+  }
+
   pill.addEventListener('mouseenter', expandPill);
-  pill.addEventListener('mouseleave', collapsePill);
+  pill.addEventListener('mouseleave', onPillLeave);
   // keyboard/focus support (tabbing onto the prev/play/next buttons)
   pill.addEventListener('focusin', expandPill);
   pill.addEventListener('focusout', () => {
