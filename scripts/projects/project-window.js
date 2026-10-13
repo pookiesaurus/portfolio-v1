@@ -516,6 +516,28 @@
     win.classList.add("pw-active");
     zCounter += 1;
     win.style.zIndex = String(zCounter);
+    setUrlHash(win.dataset.projectId);
+  }
+
+  /* ---------------- Shareable links ----------------
+     The URL hash mirrors the focused window (e.g. /projects/#starchitect),
+     so the address bar can be copied and shared. Opening a link with a
+     hash opens that project on load. replaceState keeps the back button
+     from stepping through every window that was focused. */
+
+  function getHashId() {
+    return decodeURIComponent(window.location.hash.slice(1));
+  }
+
+  function setUrlHash(id) {
+    if (getHashId() === (id || "")) return;
+    const url = window.location.pathname + window.location.search + (id ? `#${id}` : "");
+    history.replaceState(null, "", url);
+  }
+
+  function openFromHash() {
+    const id = getHashId();
+    if (id && getProjectById(id)) openProject(id);
   }
 
   // Keeps a window's titlebar reachable after the browser viewport
@@ -570,6 +592,11 @@
   function closeWindow(win, immediate) {
     const id = win.dataset.projectId;
     openWindows.delete(id);
+    if (getHashId() === id) {
+      // Point the URL at whichever window is still open, or clear it.
+      const remaining = [...openWindows.keys()];
+      setUrlHash(remaining[remaining.length - 1]);
+    }
     const remove = () => {
       win.removeEventListener("transitionend", remove);
       win.remove();
@@ -867,7 +894,10 @@
         }
       });
     });
+    openFromHash();
   }
+
+  window.addEventListener("hashchange", openFromHash);
 
   window.ProjectWindows = { init, openProject, closeWindow, openLightbox, closeLightbox };
 
