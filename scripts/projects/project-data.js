@@ -100,9 +100,9 @@ window.PROJECTS = [
       disciplines: ["Speculative Design", "Non-Screen Interaction Technology Design", "Futures Thinking", "Conceptual Design", "Agentic AI Design"]
     },
     gallery: [
-      "/images/aip/image 118.png",
-      "/images/aip/image 119.png",
-      "/images/aip/image 120.png"
+      "/images/aip/image 118.webp",
+      "/images/aip/image 119.webp",
+      "/images/aip/image 120.webp"
     ],
     blocks: [
       {
@@ -114,12 +114,12 @@ window.PROJECTS = [
         type: "images",
         label: "PART 1: FUTURES THINKING",
         items: [
-          { src: "/images/creative-futures/ft1.png" },
-          { src: "/images/creative-futures/ft2.png" },
-          { src: "/images/creative-futures/ft3.png" },
-          { src: "/images/creative-futures/ft4.png" },
-          { src: "/images/creative-futures/ft5.png" },
-          { src: "/images/creative-futures/ft6.png" },
+          { src: "/images/creative-futures/ft1.webp" },
+          { src: "/images/creative-futures/ft2.webp" },
+          { src: "/images/creative-futures/ft3.webp" },
+          { src: "/images/creative-futures/ft4.webp" },
+          { src: "/images/creative-futures/ft5.webp" },
+          { src: "/images/creative-futures/ft6.webp" },
         ]
       },
       {
@@ -130,11 +130,11 @@ window.PROJECTS = [
         type: "images",
         label: "PART 2: CONCEPTUAL DESIGN",
         items: [
-          { src: "/images/creative-futures/cd1.png" },
-          { src: "/images/creative-futures/cd2.png" },
-          { src: "/images/creative-futures/cd3.png" },
-          { src: "/images/creative-futures/cd4.png" },
-          { src: "/images/creative-futures/cd5.png" }
+          { src: "/images/creative-futures/cd1.webp" },
+          { src: "/images/creative-futures/cd2.webp" },
+          { src: "/images/creative-futures/cd3.webp" },
+          { src: "/images/creative-futures/cd4.webp" },
+          { src: "/images/creative-futures/cd5.webp" }
         ]
       },
       {
@@ -284,9 +284,9 @@ window.PROJECTS = [
       {
         type: "images",
         items: [
-          { src: "/images/unimelb-library/img1.png", caption: "Note-taking during user testing" },
-          { src: "/images/unimelb-library/img2.png", caption: "Making observations on participant's comments" },
-          { src: "/images/unimelb-library/img3.png", caption: "Analysing eye-tracking data and tasks completion metrics" }
+          { src: "/images/unimelb-library/img1.webp", caption: "Note-taking during user testing" },
+          { src: "/images/unimelb-library/img2.webp", caption: "Making observations on participant's comments" },
+          { src: "/images/unimelb-library/img3.webp", caption: "Analysing eye-tracking data and tasks completion metrics" }
         ]
       }
     ]
@@ -313,9 +313,9 @@ window.PROJECTS = [
       {
         type: "images",
         items: [
-          { src: "/images/sweetmayadacakes/og.png", caption: "Original design" },
-          { src: "/images/sweetmayadathumbnail.png", caption: "Redesigned home page" },
-          { src: "/images/sweetmayadacakes/products.png", caption: "Redesigned product list" }
+          { src: "/images/sweetmayadacakes/og.webp", caption: "Original design" },
+          { src: "/images/sweetmayadathumbnail.webp", caption: "Redesigned home page" },
+          { src: "/images/sweetmayadacakes/products.webp", caption: "Redesigned product list" }
         ]
       },
       {
@@ -350,10 +350,10 @@ window.PROJECTS = [
       disciplines: ["UI/UX Design", "User Research", "Interviewing", "Thematic Analysis", "Personas", "Figma Prototyping", "Paper Prototyping"]
     },
     gallery: [
-      "/images/airesume/img1.png",
-      "/images/airesume/img2.png",
-      "/images/airesume/img3.png",
-      "/images/airesume/img4.png"
+      "/images/airesume/img1.webp",
+      "/images/airesume/img2.webp",
+      "/images/airesume/img3.webp",
+      "/images/airesume/img4.webp"
     ],
     blocks: [
       {
@@ -415,12 +415,12 @@ window.PROJECTS = [
       disciplines: ["Game Design", "Board Games", "UX Design"]
     },
     gallery: [
-      "/images/about-me-pics/pic1.png",
-      "/images/starchitect/sell-sheet.png",
-      "/images/starchitect/showcase-table.jpeg",
-      "/images/starchitect/planet-card.png",
-      "/images/starchitect/constellation-card.png",
-      "/images/starchitect/environment-card.png"
+      "/images/about-me-pics/pic1.webp",
+      "/images/starchitect/sell-sheet.webp",
+      "/images/starchitect/showcase-table.webp",
+      "/images/starchitect/planet-card.webp",
+      "/images/starchitect/constellation-card.webp",
+      "/images/starchitect/environment-card.webp"
     ],
     blocks: [
       {

@@ -374,7 +374,7 @@
         ? `<div class="pw-gallery">${project.gallery
             .map(
               (src) =>
-                `<img src="${escapeHtml(src)}" alt="${escapeHtml(
+                `<img loading="lazy" decoding="async" src="${escapeHtml(src)}" alt="${escapeHtml(
                   project.title || ""
                 )}" loading="lazy" class="pw-lightbox-trigger">`
             )
@@ -395,7 +395,7 @@
             .map(
               (item) => `
               <figure>
-                <img src="${escapeHtml(item.src)}" alt="${escapeHtml(
+                <img loading="lazy" decoding="async" src="${escapeHtml(item.src)}" alt="${escapeHtml(
                 item.caption || project.title || ""
               )}" loading="lazy" class="pw-lightbox-trigger">
                 ${item.caption ? `<figcaption>${escapeHtml(item.caption)}</figcaption>` : ""}
@@ -592,6 +592,8 @@
   function closeWindow(win, immediate) {
     const id = win.dataset.projectId;
     openWindows.delete(id);
+    document.removeEventListener("keydown", win._escHandler);
+    win._taskbarItem?.remove();
     if (getHashId() === id) {
       // Point the URL at whichever window is still open, or clear it.
       const remaining = [...openWindows.keys()];
@@ -870,7 +872,6 @@
       }
     };
     document.addEventListener("keydown", win._escHandler);
-    win.addEventListener("DOMNodeRemoved", () => {}); // no-op, kept for clarity
 
     // trigger open transition next frame
     requestAnimationFrame(() => win.classList.add("pw-open"));
