@@ -33,12 +33,12 @@ function showRow(row) {
  
   // Apply filters
   function applyFilters() {
+    const valuesFor = (filter) =>
+      [...document.querySelectorAll(`input[data-filter="${filter}"]:checked`)].map(c => c.value);
     const checked = {
-      // year:   [...document.querySelectorAll('input[value="2026"], input[value="2025"], input[value="2024"], input[value="2023"]')].filter(c=>c.checked).map(c=>c.value),
-            year:   [...document.querySelectorAll('input[value="2026"]')].filter(c=>c.checked).map(c=>c.value),
-
-      topic:  [...document.querySelectorAll('input[value="design"], input[value="tech"], input[value="culture"], input[value="personal"]')].filter(c=>c.checked).map(c=>c.value),
-      length: [...document.querySelectorAll('input[value="short"], input[value="medium"], input[value="long"]')].filter(c=>c.checked).map(c=>c.value),
+      year:   valuesFor('year'),
+      topic:  valuesFor('topic'),
+      length: valuesFor('length'),
     };
  
     const anyActive = checked.year.length || checked.topic.length || checked.length.length;
@@ -79,3 +79,57 @@ function showRow(row) {
     document.querySelectorAll('.filter-option input').forEach(c => c.checked = false);
     applyFilters();
   }
+
+  /* ---- Posts written in the editor (/writing/new/) ----
+     Adds a row for each post in /writing/posts/index.json, sorts every
+     row newest first, and builds the Date filter from the years present. */
+  function postRow(post) {
+    const a = document.createElement('a');
+    a.href = `/writing/post/?p=${encodeURIComponent(post.slug)}`;
+    a.style.cssText = 'text-decoration: none; color: inherit; display: contents;';
+    const row = document.createElement('div');
+    row.className = 'article-row';
+    row.dataset.date = post.date;
+    row.dataset.year = post.date.slice(0, 4);
+    row.dataset.topic = (post.topics || []).join(' ');
+    row.dataset.length = Writing.lengthBucket(post.words || 0);
+    row.innerHTML = `
+        <h3>${Writing.escapeHtml(post.title)}</h3>
+        ${post.summary ? `<p>${Writing.escapeHtml(post.summary)}</p>` : ''}
+        <div class="article-meta">${Writing.metaHtml(post)}</div>`;
+    a.appendChild(row);
+    return a;
+  }
+
+  function buildYearFilter() {
+    const years = [...new Set(
+      [...document.querySelectorAll('.article-row')].map(r => r.dataset.year).filter(Boolean)
+    )].sort().reverse();
+    document.getElementById('yearOptions').innerHTML = years.map(y => `
+          <label class="filter-option">
+            <input type="checkbox" data-filter="year" value="${y}" onchange="applyFilters()"> ${y}
+          </label>`).join('');
+  }
+
+  async function loadPosts() {
+    const panel = document.getElementById('articlesPanel');
+    const emptyState = document.getElementById('emptyState');
+    try {
+      const res = await fetch('/writing/posts/index.json', { cache: 'no-cache' });
+      const posts = res.ok ? await res.json() : [];
+      posts.forEach(post => panel.insertBefore(postRow(post), emptyState));
+    } catch {}
+
+    // Newest first, across editor posts and the hand-written rows.
+    const rows = [...panel.querySelectorAll(':scope > a')]
+      .filter(a => a.querySelector('.article-row'))
+      .sort((a, b) => {
+        const da = a.querySelector('.article-row').dataset.date || '';
+        const db = b.querySelector('.article-row').dataset.date || '';
+        return db.localeCompare(da);
+      });
+    rows.forEach(a => panel.insertBefore(a, emptyState));
+    buildYearFilter();
+  }
+
+  loadPosts();

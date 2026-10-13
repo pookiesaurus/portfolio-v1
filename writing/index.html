@@ -116,20 +116,7 @@
           <h4>Date</h4>
           <span class="filter-chevron">▾</span>
         </div>
-        <div class="filter-options">
-          <label class="filter-option">
-            <input type="checkbox" value="2026" onchange="applyFilters()"> 2026
-          </label>
-          <!-- <label class="filter-option">
-            <input type="checkbox" value="2025" onchange="applyFilters()"> 2025
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" value="2024" onchange="applyFilters()"> 2024
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" value="2023" onchange="applyFilters()"> 2023
-          </label> -->
-        </div>
+        <div class="filter-options" id="yearOptions"></div>
       </div>
  
       <div class="filter-group" onclick="toggleGroup(this)">
@@ -139,16 +126,16 @@
         </div>
         <div class="filter-options">
           <label class="filter-option">
-            <input type="checkbox" value="design" onchange="applyFilters()"> Design
+            <input type="checkbox" data-filter="topic" value="design" onchange="applyFilters()"> Design
           </label>
           <label class="filter-option">
-            <input type="checkbox" value="tech" onchange="applyFilters()"> Technology
+            <input type="checkbox" data-filter="topic" value="tech" onchange="applyFilters()"> Technology
           </label>
           <label class="filter-option">
-            <input type="checkbox" value="culture" onchange="applyFilters()"> Culture
+            <input type="checkbox" data-filter="topic" value="culture" onchange="applyFilters()"> Culture
           </label>
           <label class="filter-option">
-            <input type="checkbox" value="personal" onchange="applyFilters()"> Personal
+            <input type="checkbox" data-filter="topic" value="personal" onchange="applyFilters()"> Personal
           </label>
         </div>
       </div>
@@ -160,13 +147,13 @@
         </div>
         <div class="filter-options">
           <label class="filter-option">
-            <input type="checkbox" value="short" onchange="applyFilters()"> Short (&lt;500)
+            <input type="checkbox" data-filter="length" value="short" onchange="applyFilters()"> Short (&lt;500)
           </label>
           <label class="filter-option">
-            <input type="checkbox" value="medium" onchange="applyFilters()"> Medium (500 - 1500)
+            <input type="checkbox" data-filter="length" value="medium" onchange="applyFilters()"> Medium (500 - 1500)
           </label>
           <label class="filter-option">
-            <input type="checkbox" value="long" onchange="applyFilters()"> Long (&gt;1500)
+            <input type="checkbox" data-filter="length" value="long" onchange="applyFilters()"> Long (&gt;1500)
           </label>
         </div>
       </div>
@@ -178,7 +165,7 @@
     <div class="articles-panel" id="articlesPanel">
 
       <a href="https://pookiesaurus.github.io/newsletter/issue-1.html" style="text-decoration: none; color: inherit; display: contents;" target="_blank" rel="noopener noreferrer">
-      <div class="article-row" data-year="2026" data-topic="personal tech" data-length="medium">
+      <div class="article-row" data-date="2025-06-04" data-year="2025" data-topic="personal tech" data-length="medium">
         <h3>Newsletter Issue #1</h3>
         <p>An introspection into my recent past and what the future has in store. Originally published as my first newsletter issue.</p>
         <div class="article-meta">
@@ -311,6 +298,7 @@
 
 <div class="green-bottom"></div>
 <script src="/script.js" defer></script>
+<script src="/scripts/writing/render.js" defer></script>
 <script src="/scripts/writings.js" defer></script>
 </body>
 </html>

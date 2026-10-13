@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing editor</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/images/favicon.svg" sizes="any" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hi, I'm Ryan!">
+<meta property="og:description" content="UI/UX and CompSci Student">
+<meta property="og:image" content="https://www.ryanapham.com/images/opengraph.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hi, I'm Ryan!">
+<meta name="twitter:description" content="UI/UX and CompSci Student">
+<meta name="twitter:image" content="https://www.ryanapham.com/images/opengraph.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles/writing.css">
+
+</head>
+
+<body>
+<a href="/" class="home-fab" aria-label="Home">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+</a>
+<!-- NAV -->
+<div class="blue-top"></div>
+<nav>
+  <div class="nav-left">
+    <div class="nav-left-1">
+      <a href="/projects/" class="pill">projects</a>
+      <a href="/writing/" class="pill">writings</a>
+    </div>
+    <div class="nav-left-2">
+      <a href="/about/" class="pill">about me</a>
+      <a href="/contact/" class="pill">contact</a>
+    </div>
+  </div>
+  <div class="nav-center">
+    <a href="/">Ryan Pham</a>
+  </div>
+  <div class="nav-right">
+    <div class="pill now-playing-pill t-resize" id="now-playing">
+        <div class="np-main t-resize">
+             <div class="np-disc" id="np-disc">
+                <img src="/images/placeholder.webp" id="np-cover" alt="cover">
+            </div>
+            <div class="np-info t-resize">
+                <div class="np-info t-resize">
+                    <span class="np-label" id="np-label">- · -</span>
+                <div class="np-bar-track t-resize">
+                    <div class="np-bar-fill" id="np-bar"></div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="np-controls t-resize">
+          <div class="np-buttons t-resize">
+            <button class="np-btn prev" id="np-prev" aria-label="Previous track" title="Previous">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM19 6v12L9 12z"/></svg>
+            </button>
+
+            <button class="np-btn play-pause np-play" id="np-playpause" aria-label="Play" title="Play/Pause">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path class="icon-path icon-play" d="M8 5v14l11-7z"/>
+                <path class="icon-path icon-pause" d="M7 5h4v14H7zM13 5h4v14h-4z"/>
+              </svg>
+            </button>
+
+            <button class="np-btn next" id="np-next" aria-label="Next track" title="Next">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 6v12l10-6z"/></svg>
+            </button>
+          </div>  
+          
+
+            <div class="np-bar-track t-resize" id="track2">
+              <div class="np-bar-fill" id="fill2">
+                <div class="np-bar-thumb" id="np-bar-thumb"></div>
+              </div>
+             </div>
+        </div>
+     
+    </div>
+    <span class="pill">melbourne, au</span>
+    <span class="pill" id="clock">--:--:--</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero post-hero">
+  <h1 id="heroTitle">New writing</h1>
+</section>
+
+<hr class="section-divider">
+
+<section class="writings-section">
+
+  <div class="editor-tabs">
+    <button type="button" class="pill" data-tab="write" aria-pressed="true">Write</button>
+    <button type="button" class="pill" data-tab="preview" aria-pressed="false">Preview</button>
+    <span class="editor-hint">Markdown · ⌘B bold · ⌘I italic · ⌘K link · paste or drop images</span>
+  </div>
+
+  <!-- WRITE -->
+  <div class="writings-layout" id="writeView">
+
+    <aside class="filter-panel editor-panel">
+      <h3>Details</h3>
+
+      <label class="field">
+        <span>Edit existing</span>
+        <select id="existing"><option value="">New writing</option></select>
+      </label>
+
+      <label class="field">
+        <span>Title</span>
+        <input id="title" type="text" autocomplete="off">
+      </label>
+
+      <label class="field">
+        <span>Link</span>
+        <span class="slug-row">/writing/post/?p=<input id="slug" type="text" autocomplete="off" spellcheck="false"></span>
+      </label>
+
+      <label class="field">
+        <span>Date</span>
+        <input id="date" type="date">
+      </label>
+
+      <label class="field">
+        <span>Summary <small>(shown on the Writings page)</small></span>
+        <textarea id="summary" rows="3"></textarea>
+      </label>
+
+      <div class="field">
+        <span>Topics</span>
+          <label class="filter-option"><input type="checkbox" name="topic" value="design"> Design</label>
+          <label class="filter-option"><input type="checkbox" name="topic" value="tech"> Technology</label>
+          <label class="filter-option"><input type="checkbox" name="topic" value="culture"> Culture</label>
+          <label class="filter-option"><input type="checkbox" name="topic" value="personal"> Personal</label>
+      </div>
+
+      <div class="editor-stats" id="stats">0 words</div>
+      <button type="button" class="pill editor-btn primary" id="publishBtn">Publish</button>
+      <div class="editor-status" id="status" role="status" aria-live="polite"></div>
+
+      <details class="editor-settings">
+        <summary>GitHub connection</summary>
+        <p>Publishing saves straight to the <code>portfolio-v1</code> repo. Paste a
+          <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained token</a>
+          limited to that repo, with <strong>Contents: Read and write</strong> only.
+          It's kept in this browser and nowhere else.</p>
+        <input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+        <button type="button" class="pill editor-btn" id="saveTokenBtn">Connect</button>
+        <p id="tokenStatus" role="status" aria-live="polite"></p>
+      </details>
+    </aside>
+
+    <div class="post-card editor-write">
+      <div class="editor-toolbar" role="toolbar" aria-label="Formatting">
+        <button type="button" data-action="h1" title="Heading 1">H1</button>
+        <button type="button" data-action="h2" title="Heading 2">H2</button>
+        <button type="button" data-action="h3" title="Heading 3">H3</button>
+        <span class="sep" aria-hidden="true"></span>
+        <button type="button" data-action="bold" title="Bold (⌘B)"><strong>B</strong></button>
+        <button type="button" data-action="italic" title="Italic (⌘I)"><em>I</em></button>
+        <button type="button" data-action="link" title="Link (⌘K)">Link</button>
+        <span class="sep" aria-hidden="true"></span>
+        <button type="button" data-action="quote" title="Quote">Quote</button>
+        <button type="button" data-action="list" title="Bulleted list">List</button>
+        <button type="button" data-action="divider" title="Section break">✦</button>
+        <button type="button" data-action="image" title="Insert image">Image</button>
+        <input type="file" id="imageInput" accept="image/*" multiple hidden>
+      </div>
+      <textarea id="body" spellcheck="true" aria-label="Writing" placeholder="Start writing… Use # for a heading. Headings become the contents list on the left."></textarea>
+    </div>
+
+  </div>
+
+  <!-- PREVIEW: same layout as the live post page -->
+  <div class="writings-layout post-layout" id="previewView" hidden>
+    <aside class="filter-panel toc-panel">
+      <h3>Contents</h3>
+      <div class="toc" id="toc" role="navigation" aria-label="Contents"></div>
+    </aside>
+    <article class="post-card">
+      <div class="article-meta post-meta" id="previewMeta"></div>
+      <div class="post-body" id="previewBody"></div>
+    </article>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-name">Ryan Pham</div>
+  <div class="footer-links">
+    <a href="mailto:hello@ryanapham.com" target="_blank" rel="noopener noreferrer">Email</a>
+    <a href="https://github.com/pookiesaurus" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://linkedin.com/in/phamaryan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://instagram.com/ryan.pham.design" target="_blank" rel="noopener noreferrer">Instagram</a>
+  </div>
+</footer>
+
+<div class="green-bottom"></div>
+<script src="/script.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script src="/scripts/writing/render.js"></script>
+<script src="/scripts/writing/editor.js"></script>
+</body>
+</html>

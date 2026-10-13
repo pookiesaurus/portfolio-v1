@@ -1,0 +1,359 @@
+/* ===================================================================
+   Writing post page + editor. Builds on the glass panels in styles.css
+   (.filter-panel, .article-meta, .topic-tag) so posts feel like the
+   rest of the site.
+   =================================================================== */
+
+/* ---------- READING COLOURS ----------
+   The site's usual glass is ~22% white, so text contrast swings with
+   whatever cloud is behind it (as low as 2.7:1 for grey text). Reading
+   panels use a frostier glass and darker text instead, which keeps every
+   colour here at WCAG AA (4.5:1) or better over any part of the sky:
+   body ~10:1, headings ~11:1, muted ~5.5:1. */
+:root {
+  --read-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 246, 246, 0.66));
+  --read-text: #262c33;
+  --read-heading: #1f252b;
+  --read-muted: #4a535d;
+}
+
+.post-card,
+.toc-panel,
+.editor-panel {
+  background: var(--read-glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.toc-panel h3,
+.editor-panel h3 { color: var(--read-heading); }
+
+/* Meta row + tags inside reading panels */
+.post-card .article-meta { color: var(--read-muted); }
+.post-card .topic-tag { color: var(--read-text); background: rgba(0, 0, 0, 0.07); }
+
+/* ---------- POST LAYOUT ---------- */
+
+.post-hero h1 {
+  font-size: clamp(40px, 6vw, 80px);
+  max-width: 20ch;
+}
+
+.post-layout {
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+
+/* Left-hand contents nav */
+.toc-panel {
+  padding-bottom: 14px;
+  max-height: calc(100vh - 125px);
+  overflow-y: auto;
+}
+
+.toc-back {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--read-muted);
+  text-decoration: none;
+}
+.toc-back:hover { color: var(--read-heading); }
+
+.toc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toc-link {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--read-muted);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.toc-link:hover { background: rgba(255, 255, 255, 0.6); color: var(--read-heading); }
+.toc-link.active { background: rgba(255, 255, 255, 0.85); color: var(--read-heading); font-weight: 500; }
+.toc-l2 { padding-left: 22px; }
+.toc-l3 { padding-left: 34px; font-size: 13px; }
+
+.toc-panel.is-empty .toc::after {
+  content: "No headings yet";
+  padding: 6px 10px;
+  font-size: 14px;
+  color: var(--read-muted);
+}
+
+/* The post itself */
+.post-card {
+  min-width: 0;
+  padding: 28px 32px 36px;
+  border-radius: 10px;
+  border-top-color: var(--glass-border-top);
+  border-bottom-color: var(--glass-border-bottom);
+  box-shadow: var(--glass-box-shadow);
+}
+
+.post-meta { margin-bottom: 24px; }
+
+.post-body {
+  max-width: 68ch;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--read-text);
+  overflow-wrap: break-word;
+}
+.post-body > * + * { margin-top: 1em; }
+
+.post-body h1,
+.post-body h2,
+.post-body h3 {
+  color: var(--read-heading);
+  line-height: 1.3;
+  scroll-margin-top: 110px; /* clear the sticky nav when jumped to */
+}
+.post-body h1 { margin-top: 1.8em; font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.post-body h2 { margin-top: 1.6em; font-size: 22px; font-weight: 600; }
+.post-body h3 { margin-top: 1.4em; font-size: 18px; font-weight: 500; }
+.post-body > :first-child { margin-top: 0; }
+
+.post-body a {
+  color: var(--read-heading);
+  text-decoration-color: rgba(31, 37, 43, 0.4);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.post-body strong { font-weight: 600; color: var(--read-heading); }
+
+.post-body ul,
+.post-body ol { padding-left: 1.4em; }
+.post-body li + li { margin-top: 0.3em; }
+
+.post-body blockquote {
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid rgba(0, 0, 0, 0.2);
+  color: var(--read-muted);
+  font-style: italic;
+}
+
+.post-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.6em 0;
+  border-radius: 8px;
+  box-shadow: var(--glass-box-shadow);
+}
+
+.post-body code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  font-family: "Geist Mono", monospace;
+  font-size: 0.88em;
+}
+.post-body pre {
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  overflow-x: auto;
+  line-height: 1.6;
+}
+.post-body pre code { padding: 0; background: none; }
+
+/* Section break, drawn with the same ✦ as the meta rows */
+.post-body hr {
+  margin: 2em 0;
+  border: none;
+  text-align: center;
+}
+.post-body hr::before {
+  content: "✦ ✦ ✦";
+  font-size: 12px;
+  letter-spacing: 0.6em;
+  color: var(--read-muted);
+}
+
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.post-body th,
+.post-body td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+.post-body th { font-weight: 500; color: var(--read-heading); }
+
+/* ---------- EDITOR ---------- */
+
+.writings-layout[hidden] { display: none; }
+
+.editor-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.editor-tabs .pill { font: inherit; font-size: 13px; }
+.editor-tabs .pill[aria-pressed="true"] { background: rgba(255, 255, 255, 0.5); color: rgba(0, 0, 0, 0.8); }
+/* Sits on the open sky, so it gets its own frosted backing to stay legible */
+.editor-hint {
+  margin-left: auto;
+  padding: 6px 12px;
+  border-radius: 1000px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  color: var(--read-muted);
+}
+
+.editor-panel { padding-bottom: 14px; max-height: calc(100vh - 125px); overflow-y: auto; }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--read-muted);
+}
+
+.field input,
+.field textarea,
+.field select,
+.editor-settings input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.45);
+  font: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.field textarea { resize: vertical; line-height: 1.5; }
+.field input:focus,
+.field textarea:focus,
+.field select:focus,
+.editor-settings input:focus {
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 0 0 2px rgba(77, 135, 197, 0.35);
+}
+.field input[readonly] { color: var(--read-muted); background: rgba(255, 255, 255, 0.3); }
+
+.slug-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.slug-row input { flex: 1; min-width: 0; }
+
+.field .filter-option { padding: 3px 2px; }
+
+.editor-stats { margin-bottom: 12px; font-size: 13px; color: var(--read-muted); }
+
+.editor-btn {
+  width: 100%;
+  margin-bottom: 10px;
+  font: inherit;
+  font-size: 14px;
+}
+.editor-btn.primary { background: rgba(255, 255, 255, 0.6); color: rgba(0, 0, 0, 0.8); font-weight: 500; }
+.editor-btn:disabled { opacity: 0.5; cursor: default; }
+
+.editor-status {
+  min-height: 1.4em;
+  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--read-muted);
+}
+.editor-status.is-error { color: #9b2c2c; }
+.editor-status.is-ok { color: #2f6b2f; }
+.editor-status a { color: inherit; }
+
+.editor-settings {
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+.editor-settings summary {
+  padding: 4px 0;
+  font-size: 14px;
+  color: var(--read-heading);
+  cursor: pointer;
+}
+.editor-settings p {
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--read-muted);
+}
+.editor-settings a { color: inherit; }
+.editor-settings .editor-btn { margin-top: 8px; }
+
+/* Writing area */
+.editor-write {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+.editor-write.is-dragging { box-shadow: inset 0 0 0 2px rgba(77, 135, 197, 0.5), var(--glass-box-shadow); }
+
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+}
+.editor-toolbar button {
+  padding: 6px 9px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  color: var(--read-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.editor-toolbar button:hover { background: rgba(255, 255, 255, 0.45); color: var(--text-primary); }
+.editor-toolbar .sep { width: 1px; margin: 4px 4px; background: rgba(0, 0, 0, 0.1); }
+
+#body {
+  min-height: 70vh;
+  padding: 24px 28px;
+  border: none;
+  background: transparent;
+  font-family: "Geist Mono", monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--read-text);
+  resize: vertical;
+  outline: none;
+}
+
+/* ---------- SMALL SCREENS ---------- */
+
+@media (max-width: 1020px) {
+  .toc-panel,
+  .editor-panel { max-height: none; }
+  .post-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .post-card { padding: 20px 18px 28px; }
+  #body { padding: 18px; }
+  .editor-hint { display: none; }
+}
