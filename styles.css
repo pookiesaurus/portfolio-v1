@@ -22,7 +22,7 @@
 --subheading: #38414B;
 --inner-bg: var(--glass-background);
 
---background-img: url(/images/backgroundtest3.jpeg);
+--background-img: url(/images/backgroundtest3.webp);
 
 
 --glass-background: linear-gradient(180deg, rgba(255, 255, 255, 0.219), rgba(214, 214, 214, 0.336));
@@ -65,11 +65,8 @@ min-height: 100vh;
 #C9C7A7 83.33%,
 #D5B68F 100%
 ); */
-background-image: url(/images/backgroundtest3.jpeg);
-  background-repeat: no-repeat;
-background-size: cover;  
-background-position: center top;
-background-attachment: fixed;
+/* The background image lives on body:before (below) so it sits on its
+   own fixed layer instead of repainting on every scroll frame. */
 background-color: #4D87C5;
 height: 100%;
 position: relative;
@@ -106,7 +103,6 @@ display: flex;
   background: linear-gradient(0deg, #82BC68 0%, rgba(130, 188, 104, 0.00) 100%);
 }
 
-@media screen and (max-width: 768px) {
 body:before {
   content: "";
   display: block;
@@ -123,6 +119,7 @@ body:before {
   background-size: cover;
 }
 
+@media screen and (max-width: 768px) {
 .blue-top {
   position: fixed;
   z-index: 100;
@@ -538,7 +535,7 @@ background: rgba(200,195,180,0.4);
 /* FOOTER */
 footer {
 /* background: var(--bg-footer); */
-background-image: url(/images/footer2.png);
+background-image: url(/images/footer2.webp);
 background-repeat: no-repeat;
 background-position: center bottom;
 background-size: cover;
@@ -1422,7 +1419,6 @@ box-shadow: var(--glass-box-shadow);
   transition:
     width  var(--resize-dur) var(--resize-ease),
     height var(--resize-dur) var(--resize-ease);
-  will-change: width, height;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1571,7 +1567,6 @@ to   { opacity: 1; transform: translateY(0); }
   transition:
     width  var(--resize-dur) var(--resize-ease),
     height var(--resize-dur) var(--resize-ease), background 0.15s, border-color 0.15s, opacity 0.5s;
-  will-change: width, height;
 }
 
 @media (prefers-reduced-motion: reduce) {

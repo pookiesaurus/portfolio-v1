@@ -113,13 +113,13 @@ const body = document.querySelector('body');
       title: 'the louvre',
       artist: 'lorde',
       src: '/audio/track1.mp3',
-      cover: '/images/cover1.png'
+      cover: '/images/cover1.webp'
     },
     {
       title: 'born to die',
       artist: 'lana del rey',
       src: '/audio/track2.mp3',
-      cover: '/images/cover2.jpg'
+      cover: '/images/cover2.webp'
     },
     {
       title: 'stupid song',
@@ -137,18 +137,21 @@ const body = document.querySelector('body');
       title: 'snow angel',
       artist: 'reneé rapp',
       src: '/audio/track5.mp3',
-      cover: '/images/cover5.png'
+      cover: '/images/cover5.webp'
     },
     {
       title: 'hand in my pocket',
       artist: 'alanis morissette',
       src: '/audio/track6.mp3',
-      cover: '/images/cover6.jpg'
+      cover: '/images/cover6.webp'
     }
   ];
 
   const audio = new Audio();
   audio.volume = 0.1;
+  // Don't download a song until someone presses play (or was already
+  // playing on the previous page — see restoreState).
+  audio.preload = 'none';
 
   let isPlaying = false;
   let currentTrack = 0;
@@ -408,6 +411,7 @@ barTrack.addEventListener('pointerdown', (e) => {
 
     currentTrack = state.trackIndex ?? 0;
     const t = tracks[currentTrack];
+    if (state.isPlaying) audio.preload = 'auto';
     audio.src = t.src;
     audio.volume = 0.1;
     label.innerHTML = `${t.title} · <span style="color: rgba(0, 0 , 0, 0.45);">${t.artist}</span>`;
@@ -441,20 +445,37 @@ function isMobile() {
   return window.innerWidth <= 768;
 }
 
+const BG_DEFAULT = 'url(/images/backgroundtest3.webp)';
+const BG_MOBILE_BOTTOM = 'url(/images/background-mobile-bottom.webp)';
+let currentBg = BG_DEFAULT;
+let bgTicking = false;
+
 function checkNearBottom() {
-  if (!isMobile()) return; // only run this behavior on mobile widths
+  bgTicking = false;
+  let next = BG_DEFAULT;
 
-  const scrollPosition = window.scrollY + window.innerHeight;
-  const pageHeight = document.documentElement.scrollHeight;
-  const distanceFromBottom = pageHeight - scrollPosition;
+  if (isMobile()) { // only swap the background on mobile widths
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+    const distanceFromBottom = pageHeight - scrollPosition;
+    if (distanceFromBottom <= 20) next = BG_MOBILE_BOTTOM;
+  }
 
-  if (distanceFromBottom <= 20) {
-    document.documentElement.style.setProperty('--background-img', `url(/images/background-mobile-bottom.png)`);
-  } else {
-    document.documentElement.style.setProperty('--background-img', `url(/images/backgroundtest3.jpeg)`);
+  // Only touch the root custom property when the image actually
+  // changes — setting it restyles the whole page.
+  if (next !== currentBg) {
+    currentBg = next;
+    document.documentElement.style.setProperty('--background-img', next);
   }
 }
 
-window.addEventListener('scroll', checkNearBottom, { passive: true });
-window.addEventListener('resize', checkNearBottom);
+function scheduleBgCheck() {
+  if (!bgTicking) {
+    bgTicking = true;
+    requestAnimationFrame(checkNearBottom);
+  }
+}
+
+window.addEventListener('scroll', scheduleBgCheck, { passive: true });
+window.addEventListener('resize', scheduleBgCheck);
 checkNearBottom();
