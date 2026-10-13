@@ -189,7 +189,7 @@ background: var(--pill-bg);
 border-radius: 1000px;
 padding: 11px 19px;
 /* font-size: 13px; */
-font-size: (clamp(8px, 13px, 13px));
+font-size: 13px;
 font-weight: 400;
 color: rgba(0, 0, 0, 0.60);
 background: rgba(255, 255, 255, 0.25);
@@ -213,6 +213,8 @@ background: linear-gradient(180deg, rgba(180, 180, 180, 0.219), rgba(214, 214, 2
 
 }
 .pill:hover { background: rgba(255,255,255,0.32); }
+/* Marks the page you are on */
+.pill[aria-current="page"] { background: rgba(255,255,255,0.5); color: rgba(0, 0, 0, 0.8); }
 
 /* HERO */
 .hero {
@@ -231,7 +233,7 @@ font-size: clamp(6vw, 96px, 10vw);
 font-weight: 600;
 line-height: 1.05;
 color: rgba(0, 0, 0, 0.53);
-letter-spacing: -3%;
+letter-spacing: -0.03em;
 /* letter-spacing: -0.02em; */
 }
 .hero h1 .dim { color: rgba(0, 0, 0, 0.35); }
@@ -484,7 +486,8 @@ width: 100%;
 }
 
 .grid-mode .project-meta {
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 12px;
 }
 
 .meta-dot {
@@ -1204,7 +1207,7 @@ box-shadow: var(--glass-box-shadow);
     font-weight: 400;
     line-height: 24px;
     color: rgba(0, 0, 0, 0.66);
-    text-align: justify;
+    text-align: left;
     margin-bottom: 14px;
   }
   .intro-text p:last-child { margin-bottom: 0; }
@@ -1261,7 +1264,7 @@ box-shadow: var(--glass-box-shadow);
   .edu-list    { list-style: none; margin-bottom: 8px; }
   .edu-list li {
     font-size: 15px;
-    color: rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.5);
     padding-left: 12px;
     position: relative;
     margin-bottom: 4px;

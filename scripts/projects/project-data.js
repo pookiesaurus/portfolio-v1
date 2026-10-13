@@ -23,7 +23,7 @@
    info      — optional fact-sheet row shown as horizontal stat blocks,
                just under tags/date. All fields optional:
                {
-                 timeline: "Feb – June 2026",
+                 timeline: "Feb – Jun 2026",
                  role: "Visual Director, UX Designer",
                  team: [
                    "Solo project"                              // plain string, OR
@@ -90,7 +90,7 @@ window.PROJECTS = [
     ],
     tags: ["Group Project", "Futures Concept"],
     info: {
-      timeline: "March - June 2026",
+      timeline: "Mar – Jun 2026",
       role: "Art Director, Concept Lead",
       team: [
         "Ryan Pham (me!)",
@@ -252,14 +252,14 @@ window.PROJECTS = [
     id: "unimelb-library-website-usability-study",
     title: "UniMelb Library Website Usability Study",
     eyebrow: "UX Research",
-    date: "October 2025",
+    date: "November 2025",
     links: [
       { label: "Read the report", url: "https://docs.google.com/document/d/1O9H9ZfIFuetLsXoGjn0KF3himYEe2KTfq85eh5FhPYw/edit?usp=sharing" },
       { label: "View report video", url: "https://www.youtube.com/watch?v=sy_EGIsYE4o" }
     ],
     tags: ["Usability Evaluation", "Group Project"],
     info: {
-      timeline: "Sep - Oct 2025",
+      timeline: "Sep – Oct 2025",
       role: "UX Researcher",
       team: [
         "Ryan Pham (me!)",
@@ -304,7 +304,7 @@ window.PROJECTS = [
     ],
     tags: ["Product Design", "Uni Project"],
     info: {
-      timeline: "Apr - June 2025",
+      timeline: "Apr – Jun 2025",
       role: "Product Designer",
       disciplines: ["Figma prototyping", "Low fidelity prototyping", "High fidelity prototyping", "Product Design"]
     },
@@ -338,7 +338,7 @@ window.PROJECTS = [
     ],
     tags: ["Group Project", "Prototyping"],
     info: {
-      timeline: "Aug - Nov 2024",
+      timeline: "Aug – Nov 2024",
       role: "Product Designer",
       team: [
         "Ryan Pham (me!)",
@@ -377,7 +377,7 @@ window.PROJECTS = [
     ],
     tags: ["Data Analysis", "Uni Project"],
     info: {
-      timeline: "Apr - May 2025",
+      timeline: "Apr – May 2025",
       role: "Data Analyst",
       team: [
         "Ryan Pham (me!)"
@@ -405,7 +405,7 @@ window.PROJECTS = [
     ],
     tags: ["Group Project", "Game Design"],
     info: {
-      timeline: "Apr - May 2026",
+      timeline: "Apr – May 2026",
       role: "Game Designer",
       team: [
         "Ryan Pham (me!)",
